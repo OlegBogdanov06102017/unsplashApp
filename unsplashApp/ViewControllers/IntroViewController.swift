@@ -7,10 +7,13 @@
 
 import UIKit
 import AuthenticationServices
+import Security
 import Auth0
 
 
-class introViewController: UIViewController {
+
+
+class IntroViewController: UIViewController {
     //MARK: Свойства класса
     let image = UIImage(named: "image 1") //фон в виде фотки
     let exploreUnspalshPhotoText = UILabel()  //главный лэйбл explore unsplash photo
@@ -19,8 +22,8 @@ class introViewController: UIViewController {
     let explorePhotosButton = UIButton(type: .system) // кнопка explore photos
     private var userIsAuthorized = false
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
-    private var canStartSessionAuth = false
     private var authTokenUrl = "https://unsplash.com/oauth/token"
+    
     
     
     
@@ -29,6 +32,7 @@ class introViewController: UIViewController {
         super.loadView()
         let imageView = UIImageView(image: image)
         view = imageView
+        view.isUserInteractionEnabled = true
         //MARK: Explore Unspalsh photos
         let exploreFrame = CGRect(x: 24, y: 292 , width: 341, height: 186)
         exploreUnspalshPhotoText.frame = exploreFrame
@@ -43,8 +47,8 @@ class introViewController: UIViewController {
         let topConst = exploreUnspalshPhotoText.topAnchor.constraint(equalTo: view.topAnchor, constant: 290)
         let bottomConst = exploreUnspalshPhotoText.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 336)
         NSLayoutConstraint.activate([leftConst, rightConst, topConst, bottomConst])
-        
-        
+
+
         //MARK: The source of freely-usable images. Powered by creators everywhere.
         let sourceFrame = CGRect(x: 24, y: 494, width: 327, height: 84)
         sourceText.frame = sourceFrame
@@ -71,8 +75,8 @@ class introViewController: UIViewController {
         logInButton.backgroundColor = UIColor(red: 255/255 , green: 255/255, blue: 255/255, alpha: 1)
         logInButton.layer.cornerRadius = 5
         logInButton.titleLabel?.textAlignment = .center
-  //      logInButton.addTarget(self, action: #selector(tapToLogin), for: .touchUpInside)
         view.addSubview(logInButton)
+        logInButton.addTarget(self, action: #selector(tapToLogin(_:)), for: .touchUpInside)
         let leftLogInConst = logInButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16)
         let rightSLogInConst = logInButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 16)
         let topLogInConst = logInButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 648)
@@ -93,6 +97,7 @@ class introViewController: UIViewController {
         explorePhotosButton.titleLabel?.textAlignment = .center
         explorePhotosButton.layer.cornerRadius = 5
         view.addSubview(explorePhotosButton)
+        explorePhotosButton.addTarget(self, action: #selector(moveToExplore), for: .touchUpInside)
         let leftExploreButtonConst = explorePhotosButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16)
         let rightExploreButtonConst = explorePhotosButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 16)
         let topExploreButtonConst = explorePhotosButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 664)
@@ -106,48 +111,139 @@ class introViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tapToLogin()
+        
+        logInButton.isUserInteractionEnabled = true
+        explorePhotosButton.isUserInteractionEnabled = true
+        
+        print("[DEBUG] Login button targets: \(logInButton.allTargets)")
+       
         // Do any additional setup after loading the view.
     }
     
-    
     //MARK: метод для нажатия на клавижу
     
-    @objc func tapToLogin() {
-        if !userIsAuthorized {
-            makeAuthorize(url: authorizeUrl)
-        }
-    }
-    func makeAuthorize(url: String) {
-        guard let authUrl = URL(string: url) else { return }
-        let scheme = "code"
-        let session = ASWebAuthenticationSession(url: authUrl, callbackURLScheme: scheme) { callbackURL, error in
-            guard error == nil, let callbackURL = callbackURL else { return }
-
-            // The callback URL format depends on the provider. For this example:
-            //   exampleauth://auth?token=1234
-//            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
-//            let token = queryItems?.filter({ $0.name == "token" }).first?.value
-        var initialUrl = URLComponents(string: url)
+    @objc func tapToLogin(_ sender: UIButton) {
+        var initialUrl = URLComponents(string: authorizeUrl)
             
-            let params = [
-                URLQueryItem(name: "client_id", value: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0"),
-                URLQueryItem(name: "redirect_uri", value: "successAuth"),
-                URLQueryItem(name: "response_type", value: "code"),
-                URLQueryItem(name: "scope", value: "read_user")
-            ]
-            initialUrl?.queryItems = params
-            let resultUrl = initialUrl?.url
-            print(resultUrl)
+        let paramets = [
+            URLQueryItem(name: "client_id", value: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0"),
+            URLQueryItem(name: "redirect_uri", value: "myUnspalshApp://successCallBack"),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: "public")
+        ]
+        initialUrl?.queryItems = paramets
+        let resultUrl = initialUrl?.url
+        
+        makeAuthorize(url: (resultUrl))
+        
+        
+    }
+    
+    //MARK: функция для обработки authorize
+    func makeAuthorize(url: URL?) {
+      //  guard let authUrl = URL(string: url) else { return }
+        let scheme = "myUnspalshApp"
+        let session = ASWebAuthenticationSession(url: url!,  callbackURLScheme: scheme) { callbackURL, error  in
+            guard error == nil, let callbackURL = callbackURL,
+            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems,
+            let authToken = queryItems.filter({ $0.name == "code" }).first?.value
+            else {
+                print("An error occurred when attempting to sign in.")
+                return }
+            print(authToken ?? "No Token")
+            self.postRequestGetToken(code: authToken) { response, error in
+                print(response?.access_token)
+            }
+                                                                                                    // распарсить callbackurl и вытащить из него code
+                                                                                                            //засунуть в переменную
+                                                                                                            // отправить пост запрос на token с переменной
+                                                                                                            //call back подправить на корректный
+            
         }
+        
         session.presentationContextProvider = self
         session.start()
         
+        
+        
+    }
+    //MARK: Отправляем запрос на получение токена
+    private func postRequestGetToken(code: String, completion: @escaping (ResponseAccessToken?, Error?) -> Void) {
+        guard let url = URL(string: authTokenUrl) else {return}
+        let body = Request(client_id: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0",
+                           client_secret: "sEBSPdHKCZMQgokmV2kZLqSniFjc09RKZfyzjSzUmmE",
+                           redirect_uri: "myUnspalshApp://successCallBack",
+                           code: code,
+                           grant_type: "authorization_code")
+        guard let bodyData = try? JSONEncoder().encode(body) else {return}
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = bodyData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                    completion(nil, error)
+                    return
+                }
+                guard let response = response, let data = data else {return}
+                print(response)
+                do {
+                    let newBody = try JSONDecoder().decode(ResponseAccessToken.self, from: data)
+                    completion(newBody, nil)
+                    // let newBody = try JSONSerialization.jsonObject(with: data)
+                    print(newBody)
+                    let result = newBody.access_token.data(using: .utf8)
+                    do {
+                        let status = try KeychainManager.save(accessToken: result!)
+                        self.successAlert()
+                        print("Token is successfuly saved")
+                    } catch {
+                        print(error)
+                        DispatchQueue.main.async {
+                            self.alreadySuccess()  // почему выплывает старый алерт
+                        }
+                    }
+                } catch let error {
+                    completion(nil, error)
+                    print(error)
+                }
+            }
+        }.resume()
+        
+    }
+    //MARK: Метод для создания алерт об успешной авторизации
+    private func successAlert() {
+        let alert = UIAlertController(title: "Success", message: "You have successfuly passed authorization", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    private func alreadySuccess() {
+        let alert = UIAlertController(title: "Success", message: "You have already authorized", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+
+     //MARK: функция для перехода на ExploreViewController
+    @objc func moveToExplore (_ sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "Main", bundle:nil)
+        let exploreVC = self.storyboard?.instantiateViewController(withIdentifier: "ExploreTableViewController") as! ExploreTableViewController
+        self.navigationController?.pushViewController(exploreVC, animated: true)
+      //  self.present(exploreVC, animated: true)
     }
 }
-extension introViewController: ASWebAuthenticationPresentationContextProviding  {
+extension IntroViewController: ASWebAuthenticationPresentationContextProviding  {
         func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
             return ASPresentationAnchor()
         }
     }
 
+
+
+//override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//    let exploreVC = segue.destination as! ExploreViewController
