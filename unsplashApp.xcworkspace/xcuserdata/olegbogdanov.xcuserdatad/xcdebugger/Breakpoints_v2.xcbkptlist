@@ -7,107 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5"
-            shouldBeEnabled = "No"
+            uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unsplashApp/ViewControllers/IntroViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "moveToExplore(_:)"
-            landmarkType = "7">
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "IntroViewController"
+            landmarkType = "21">
             <Locations>
                <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f4f4"
+                  uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2 - 935813a61fd60976"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
+                  symbolName = "unsplashApp.IntroViewController.sentSuccessAlert(alert: __C.UIAlertController) -&gt; ()"
                   moduleName = "unsplashApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "112">
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "44">
                </Location>
                <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f4f4"
+                  uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2 - 7768789e49fe31ae"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
+                  symbolName = "unsplashApp.IntroViewController.sentSuccessAlert() -&gt; ()"
                   moduleName = "unsplashApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f4f4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "540">
-               </Location>
-               <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f4d5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "233"
-                  endingLineNumber = "233"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f517"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "235"
-                  endingLineNumber = "235"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "8936D119-0F21-428C-97DB-A6B75B2A68D5 - e01cca549ea8f548"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.moveToExplore(__C.UIButton) -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "236"
-                  endingLineNumber = "236"
-                  offsetFromSymbolStart = "52">
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -115,17 +55,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A602B3AB-67E5-41B9-A47E-E722290E9BF6"
-            shouldBeEnabled = "No"
+            uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "unsplashApp/ViewControllers/IntroViewController.swift"
+            filePath = "unsplashApp/Files/KeychainManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "loadView()"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "sentDelegate()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6 - 47df4ddb7014d2f3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "unsplashApp.KeychainManager.sentAlert() -&gt; ()"
+                  moduleName = "unsplashApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/Files/KeychainManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6 - 5a2315ddc8fff829"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "unsplashApp.KeychainManager.sentDelegate() -&gt; ()"
+                  moduleName = "unsplashApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/Files/KeychainManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

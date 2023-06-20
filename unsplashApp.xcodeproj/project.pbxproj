@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA09306D2A3B55F300DF626E /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09306C2A3B55F300DF626E /* ApiManager.swift */; };
 		FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B64152A30E76B0050F13D /* KeychainManager.swift */; };
 		FA515D002A153DD600EE0121 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = FA515CFF2A153DD600EE0121 /* Auth0 */; };
 		FA5672AB2A37007200D6A70F /* ExploreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5672AA2A37007200D6A70F /* ExploreTableViewController.swift */; };
@@ -26,6 +27,7 @@
 		0FE88279963ADF9656A5C036 /* Pods-unsplashApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashApp.release.xcconfig"; path = "Target Support Files/Pods-unsplashApp/Pods-unsplashApp.release.xcconfig"; sourceTree = "<group>"; };
 		92BA29945DFB91087FC12C9F /* Pods_unsplashApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_unsplashApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D13E0502347E555B2E77FE /* Pods-unsplashApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashApp.debug.xcconfig"; path = "Target Support Files/Pods-unsplashApp/Pods-unsplashApp.debug.xcconfig"; sourceTree = "<group>"; };
+		FA09306C2A3B55F300DF626E /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA0B64152A30E76B0050F13D /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FA5672AA2A37007200D6A70F /* ExploreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewController.swift; sourceTree = "<group>"; };
 		FA6292AD2A32431D00B11064 /* ResponseAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseAccessToken.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		FA7672A82A0CCFF80039B351 /* unsplashApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA943B962A41D15A008EDB5B /* Views */,
 				FAD6A8ED2A1A03B20098F80A /* Files */,
 				FAC575672A114026001F265F /* Fonts */,
 				FA7672C02A0CD2530039B351 /* Resources */,
@@ -114,7 +117,6 @@
 		FA7672BE2A0CD20A0039B351 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */,
 				FA7672AD2A0CCFF80039B351 /* IntroViewController.swift */,
 				FA5672AA2A37007200D6A70F /* ExploreTableViewController.swift */,
 			);
@@ -139,6 +141,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		FA943B962A41D15A008EDB5B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FAC575672A114026001F265F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 				FAD6A8F02A1A05760098F80A /* Request.swift */,
 				FA0B64152A30E76B0050F13D /* KeychainManager.swift */,
 				FA6292AD2A32431D00B11064 /* ResponseAccessToken.swift */,
+				FA09306C2A3B55F300DF626E /* ApiManager.swift */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -280,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7672AE2A0CCFF80039B351 /* IntroViewController.swift in Sources */,
+				FA09306D2A3B55F300DF626E /* ApiManager.swift in Sources */,
 				FA9BBF3D2A39D0D300F20A09 /* IntroView.swift in Sources */,
 				FA7672AA2A0CCFF80039B351 /* AppDelegate.swift in Sources */,
 				FA6292AE2A32431D00B11064 /* ResponseAccessToken.swift in Sources */,

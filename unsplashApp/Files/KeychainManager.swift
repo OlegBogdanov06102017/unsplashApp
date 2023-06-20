@@ -7,15 +7,20 @@
 
 import Foundation
 import Security
+import UIKit
 
 enum KeychainError: Error {
     case duplicateToken
     case tokenNotFound
     case unknowned(OSStatus)
 }
+protocol SendAlertsToIntroViewController: AnyObject {
+    func sentSuccessAlert()
+    func sentDuplicateToken()
+}
 
 final class KeychainManager {
-   // let service = "https://unsplash.com/@olegbogdanov26"
+    
     static func save(accessToken: Data)  throws  {
         let responseData: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,       //используется для значений хранимых элементов
@@ -24,7 +29,7 @@ final class KeychainManager {
             kSecValueData: accessToken                //для передачи данных сохраняемого элемента
             ]
        let status = SecItemAdd(responseData as CFDictionary, nil)
-        
+    
         guard status == errSecSuccess else {
             if status == errSecDuplicateItem {
                 throw KeychainError.duplicateToken
@@ -48,4 +53,26 @@ final class KeychainManager {
         }
         return String(data: result as! Data, encoding: .utf8)!
     }
+    func sentDelegate() {
+        let intro = IntroViewController()
+        intro.delegate = self
+    }
 }
+extension KeychainManager: SendAlertsToIntroViewController {
+    func sentSuccessAlert() {
+        let alert = UIAlertController(title: "Success", message: "You have successfuly passed authorization", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+    
+    }
+    
+    func sentDuplicateToken() {
+            let alert = UIAlertController(title: "Success", message: "You have already authorized", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+    }
+    
+    
+}
+
+
