@@ -7,23 +7,14 @@
 
 import Foundation
 import AuthenticationServices
-<<<<<<< HEAD
 import UIKit
 
-
-class ApiManager: NSObject  {   //какой тип класса бы подошел?
-    private var authTokenUrl = "https://unsplash.com/oauth/token"
-    private var authorizeUrl = "https://unsplash.com/oauth/authorize"
-=======
-
-
-
-class ApiManager: NSObject  {
+class ApiManager: NSObject  { //какой тип класса бы подошел?
     private let getCollection = "https://api.unsplash.com/collections"
     private var authTokenUrl = "https://unsplash.com/oauth/token"
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
     private let getRandomPhotoUri = "https://api.unsplash.com/photos/random"
->>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
+
     
    
    @objc func authorize(_ sender:UIButton!) {
@@ -108,8 +99,7 @@ class ApiManager: NSObject  {
         
     }
     
-<<<<<<< HEAD
-=======
+    
     //MARK: Выполняем запрос на получение коллекиця, в дальнейшей для добавления в коллекш вью (класс getResopnseCollection)
     func getRequestCollection(completion: @escaping(Collections?, Error?) -> Void) {
         guard let url = URL(string: getCollection) else {return}
@@ -210,13 +200,8 @@ class ApiManager: NSObject  {
             completion(.success(pagination ? newData : originalData ))
         })
     }
-    
-    
-    
-    
->>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
-    
 }
+
 extension ApiManager: ASWebAuthenticationPresentationContextProviding  {
         func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
             return ASPresentationAnchor()

@@ -1,4 +1,5 @@
 {
+  "originHash" : "b7bd304ef1ba33a4eeeb4a86e0077f1720c72379e2cc70e30617ea231c877667",
   "pins" : [
     {
       "identity" : "auth0.swift",
@@ -19,6 +20,15 @@
       }
     },
     {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
+      }
+    },
+    {
       "identity" : "simplekeychain",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/auth0/SimpleKeychain.git",
@@ -28,5 +38,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

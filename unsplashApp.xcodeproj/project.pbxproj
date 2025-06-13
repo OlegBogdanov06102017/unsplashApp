@@ -247,6 +247,7 @@
 			packageReferences = (
 				FA515CFE2A153DD600EE0121 /* XCRemoteSwiftPackageReference "Auth0" */,
 				FACB99242AB51575008423D4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FABFB2B82DFC6FE6004D8B7A /* XCRemoteSwiftPackageReference "Locksmith" */,
 			);
 			productRefGroup = FA7672A72A0CCFF80039B351 /* Products */;
 			projectDirPath = "";
@@ -573,6 +574,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
+			};
+		};
+		FABFB2B82DFC6FE6004D8B7A /* XCRemoteSwiftPackageReference "Locksmith" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matthewpalmer/Locksmith";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
 			};
 		};
 		FACB99242AB51575008423D4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

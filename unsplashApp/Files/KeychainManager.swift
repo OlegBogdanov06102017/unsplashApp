@@ -251,11 +251,6 @@ final class KeychainManager {
         let intro = IntroViewController()
         intro.delegate = self
     }
-<<<<<<< HEAD
-=======
-    
-    
->>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
 }
 extension KeychainManager: SendAlertsToIntroViewController {
     func sentSuccessAlert() {

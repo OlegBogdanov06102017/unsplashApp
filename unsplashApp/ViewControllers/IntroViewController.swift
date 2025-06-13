@@ -14,11 +14,8 @@ import Auth0
 
 
 class IntroViewController: UIViewController {
-<<<<<<< HEAD
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
     private var authTokenUrl = "https://unsplash.com/oauth/token"
-=======
->>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
     weak var delegate: SendAlertsToIntroViewController?
     private var showAlert = false
     
