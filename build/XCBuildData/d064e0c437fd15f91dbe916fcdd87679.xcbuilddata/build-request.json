@@ -1,0 +1,46 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e981e815ab82f7b9c9e14b3d7c5719dd037"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98b2004c7f765b8bdf2fe38076d2b3cb8c"
+    }
+  ],
+  "containerPath" : "/Users/olegbogdanov/Documents/Swift/developer/unsplashApp/Pods/Pods.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/olegbogdanov/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/olegbogdanov/Library/Developer/Xcode/DerivedData/Pods-dhlgppzmfvmifxccauloujqtajnm/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/olegbogdanov/Library/Developer/Xcode/DerivedData/Pods-dhlgppzmfvmifxccauloujqtajnm/Index.noindex/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}

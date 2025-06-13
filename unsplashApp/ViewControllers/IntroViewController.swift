@@ -14,8 +14,11 @@ import Auth0
 
 
 class IntroViewController: UIViewController {
+<<<<<<< HEAD
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
     private var authTokenUrl = "https://unsplash.com/oauth/token"
+=======
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
     weak var delegate: SendAlertsToIntroViewController?
     private var showAlert = false
     
@@ -50,7 +53,7 @@ class IntroViewController: UIViewController {
     //MARK: функция для перехода на ExploreViewController
      @objc func moveToExplore () {
         let storyBoard = UIStoryboard(name: "Main", bundle:nil)
-        let exploreVC = self.storyboard?.instantiateViewController(withIdentifier: "ExploreTableViewController") as! ExploreTableViewController
+        let exploreVC = self.storyboard?.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
         self.navigationController?.pushViewController(exploreVC, animated: true)
      //   self.present(exploreVC, animated: true)
  }

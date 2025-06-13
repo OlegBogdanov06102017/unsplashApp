@@ -3,6 +3,7 @@
    uuid = "605E3366-ACF2-4D68-AC1A-FDA8CFF79F8A"
    type = "0"
    version = "2.0">
+<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -101,4 +102,6 @@
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
+=======
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
 </Bucket>

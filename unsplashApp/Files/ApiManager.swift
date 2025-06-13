@@ -7,12 +7,23 @@
 
 import Foundation
 import AuthenticationServices
+<<<<<<< HEAD
 import UIKit
 
 
 class ApiManager: NSObject  {   //какой тип класса бы подошел?
     private var authTokenUrl = "https://unsplash.com/oauth/token"
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
+=======
+
+
+
+class ApiManager: NSObject  {
+    private let getCollection = "https://api.unsplash.com/collections"
+    private var authTokenUrl = "https://unsplash.com/oauth/token"
+    private var authorizeUrl = "https://unsplash.com/oauth/authorize"
+    private let getRandomPhotoUri = "https://api.unsplash.com/photos/random"
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
     
    
    @objc func authorize(_ sender:UIButton!) {
@@ -97,6 +108,113 @@ class ApiManager: NSObject  {   //какой тип класса бы подош
         
     }
     
+<<<<<<< HEAD
+=======
+    //MARK: Выполняем запрос на получение коллекиця, в дальнейшей для добавления в коллекш вью (класс getResopnseCollection)
+    func getRequestCollection(completion: @escaping(Collections?, Error?) -> Void) {
+        guard let url = URL(string: getCollection) else {return}
+        var request = URLRequest(url: url)
+        do {
+            let token = try KeychainManager.getToken()
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } catch {
+            print(error)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                guard let data = data, let response = response else { return }
+                print(data)
+                print(response)
+            do {
+                let newBodyForCollection = try JSONDecoder().decode(Collections.self, from: data)
+                completion(newBodyForCollection, nil)
+                let result = newBodyForCollection
+                print(data)
+                print(result)
+            } catch let error {
+                print(error)
+                completion(nil, error)
+                return
+            }
+            
+        }.resume()
+    }
+    //MARK: Получение рандом фото для заголовка
+    func getRequestRandomPhoto(completion: @escaping (ResponseGetRandomPhoto?, Error?)-> Void) {
+            
+            guard let url = URL(string: getRandomPhotoUri) else { return }
+            var request = URLRequest(url: url)
+            do {
+                let token = try KeychainManager.getToken()
+                request.httpMethod = "GET"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            } catch {
+                print(error)
+            }
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    if let error = error {
+                        print(error)
+                        completion(nil, error)
+                        return
+                    }
+                    guard let data = data, let response = response else { return }
+                        print(data)
+                        print(response)
+                        do {
+                            let decoder = JSONDecoder()
+                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                            let newBody = try decoder.decode(ResponseGetRandomPhoto.self, from: data)
+                            completion(newBody, nil)
+                            let result = newBody
+                            print(data)
+                            print(result)
+    
+                            // result: Data -> "https://test.com/image.png"
+                            
+                            // result: Data -> PNG0x120x123... -> UImage
+                            
+                        }
+                        catch let error {
+                            completion(nil, error)
+                            print(error)
+                        }
+                    
+            }.resume()
+        }
+    //MARK: Запрос на фотки с пагинацией
+    func getPhotoForPagination(pagination: Bool = false, completion: @escaping (Result<[String], Error>) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + (pagination ? 3: 2), execute: {
+            let originalData = [
+            "Apple",
+            "Google",
+            "Facebook",
+            "Apple",
+            "Google",
+            "Facebook",
+            "Apple",
+            "Google",
+            "Facebook",
+            "Apple",
+            "Google",
+            "Facebook"
+            ]
+            
+            let newData = [
+            "banana",
+            "oranges",
+            "grapes"
+            ]
+            completion(.success(pagination ? newData : originalData ))
+        })
+    }
+    
+    
+    
+    
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
     
 }
 extension ApiManager: ASWebAuthenticationPresentationContextProviding  {

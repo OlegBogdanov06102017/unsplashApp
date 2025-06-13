@@ -20,21 +20,28 @@
                     </view>
                     <navigationItem key="navigationItem" id="fyL-JZ-tF0"/>
                     <connections>
-                        <segue destination="WsN-VV-uDl" kind="show" identifier="goToExplore" id="UyD-7i-kpY"/>
+                        <segue destination="fV1-yO-ijb" kind="show" id="9xy-W6-lq3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2962.5954198473282" y="3.5211267605633805"/>
         </scene>
-        <!--Explore Table View Controller-->
-        <scene sceneID="aLn-NK-Kx3">
+        <!--Explore View Controller-->
+        <scene sceneID="hN6-EI-jEM">
             <objects>
+<<<<<<< HEAD
                 <tableViewController restorationIdentifier="ExploreTableViewController" storyboardIdentifier="ExploreTableViewController" id="WsN-VV-uDl" customClass="ExploreTableViewController" customModule="unsplashApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="YQB-Mn-WCR">
+=======
+                <viewController storyboardIdentifier="ExploreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fV1-yO-ijb" customClass="ExploreViewController" customModule="unsplashApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JOx-50-447">
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rQ7-61-DK5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+<<<<<<< HEAD
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3Cx-Og-9Uc">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
@@ -53,8 +60,14 @@
                     <navigationItem key="navigationItem" id="v1n-V8-hgQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru1-Vb-mUq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+=======
+                    </view>
+                    <navigationItem key="navigationItem" id="5p7-0u-EWr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zmn-xr-tUn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+>>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
             </objects>
-            <point key="canvasLocation" x="3815" y="4"/>
+            <point key="canvasLocation" x="3831" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ned-Pj-meI">
