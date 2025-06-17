@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		FA09306D2A3B55F300DF626E /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09306C2A3B55F300DF626E /* ApiManager.swift */; };
 		FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B64152A30E76B0050F13D /* KeychainManager.swift */; };
 		FA3962A62A44303200A215C1 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3962A52A44303200A215C1 /* HeaderCell.swift */; };
-		FA515D002A153DD600EE0121 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = FA515CFF2A153DD600EE0121 /* Auth0 */; };
 		FA6292AE2A32431D00B11064 /* ResponseAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6292AD2A32431D00B11064 /* ResponseAccessToken.swift */; };
 		FA7672AA2A0CCFF80039B351 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672A92A0CCFF80039B351 /* AppDelegate.swift */; };
 		FA7672AC2A0CCFF80039B351 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672AB2A0CCFF80039B351 /* SceneDelegate.swift */; };
@@ -19,6 +18,13 @@
 		FA7672B32A0CCFF90039B351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA7672B22A0CCFF90039B351 /* Assets.xcassets */; };
 		FA7672B62A0CCFF90039B351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7672B42A0CCFF90039B351 /* LaunchScreen.storyboard */; };
 		FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8143672A461D5D00B8B956 /* ExploreViewController.swift */; };
+		FA8F072A2DFF1AD10024E266 /* LocksmithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07252DFF1AD10024E266 /* LocksmithError.swift */; };
+		FA8F072B2DFF1AD10024E266 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07232DFF1AD10024E266 /* Locksmith.swift */; };
+		FA8F072C2DFF1AD10024E266 /* LocksmithAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */; };
+		FA8F072D2DFF1AD10024E266 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */; };
+		FA8F072E2DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */; };
+		FA8F072F2DFF1AD10024E266 /* LocksmithSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */; };
+		FA8F07302DFF1AD10024E266 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */; };
 		FA943B982A41D454008EDB5B /* ExploreTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA943B972A41D454008EDB5B /* ExploreTableView.swift */; };
 		FA9BBF3D2A39D0D300F20A09 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */; };
 		FAAE47692A5319D400EC9316 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAE47682A5319D400EC9316 /* ExploreTableViewCell.swift */; };
@@ -27,7 +33,6 @@
 		FAC4E4922A54CB8500694AC9 /* CollectionViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4E4912A54CB8500694AC9 /* CollectionViewTableCell.swift */; };
 		FAC575692A114065001F265F /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAC575682A114065001F265F /* Inter.ttf */; };
 		FACB5F1C2A48AE0700F73388 /* ResponseGetRandomPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB5F1B2A48AE0700F73388 /* ResponseGetRandomPhoto.swift */; };
-		FACB99262AB51575008423D4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FACB99252AB51575008423D4 /* Kingfisher */; };
 		FACF6ACC2AD0BD910008B0CC /* Photocell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACF6ACB2AD0BD910008B0CC /* Photocell.swift */; };
 		FAD6A8F12A1A05760098F80A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6A8F02A1A05760098F80A /* Request.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +54,15 @@
 		FA7672B52A0CCFF90039B351 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA7672B72A0CCFF90039B351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8143672A461D5D00B8B956 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
+		FA8F07212DFF1AD10024E266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA8F07222DFF1AD10024E266 /* Locksmith.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locksmith.h; sourceTree = "<group>"; };
+		FA8F07232DFF1AD10024E266 /* Locksmith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
+		FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithAccessibleOption.swift; sourceTree = "<group>"; };
+		FA8F07252DFF1AD10024E266 /* LocksmithError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithError.swift; sourceTree = "<group>"; };
+		FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithInternetAuthenticationType.swift; sourceTree = "<group>"; };
+		FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithInternetProtocol.swift; sourceTree = "<group>"; };
+		FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
 		FA943B972A41D454008EDB5B /* ExploreTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableView.swift; sourceTree = "<group>"; };
 		FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		FAAE47682A5319D400EC9316 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
@@ -66,8 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FACB99262AB51575008423D4 /* Kingfisher in Frameworks */,
-				FA515D002A153DD600EE0121 /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +89,7 @@
 		AC47BA03DCA5DD6BC05279B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA8F07292DFF1AD10024E266 /* Source */,
 				92BA29945DFB91087FC12C9F /* Pods_unsplashApp.framework */,
 			);
 			name = Frameworks;
@@ -159,6 +172,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		FA8F07292DFF1AD10024E266 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */,
+				FA8F07212DFF1AD10024E266 /* Info.plist */,
+				FA8F07222DFF1AD10024E266 /* Locksmith.h */,
+				FA8F07232DFF1AD10024E266 /* Locksmith.swift */,
+				FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */,
+				FA8F07252DFF1AD10024E266 /* LocksmithError.swift */,
+				FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */,
+				FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */,
+				FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		FA943B962A41D15A008EDB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,8 +242,6 @@
 			);
 			name = unsplashApp;
 			packageProductDependencies = (
-				FA515CFF2A153DD600EE0121 /* Auth0 */,
-				FACB99252AB51575008423D4 /* Kingfisher */,
 			);
 			productName = unsplashApp;
 			productReference = FA7672A62A0CCFF80039B351 /* unsplashApp.app */;
@@ -245,9 +272,8 @@
 			);
 			mainGroup = FA76729D2A0CCFF80039B351;
 			packageReferences = (
-				FA515CFE2A153DD600EE0121 /* XCRemoteSwiftPackageReference "Auth0" */,
-				FACB99242AB51575008423D4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				FABFB2B82DFC6FE6004D8B7A /* XCRemoteSwiftPackageReference "Locksmith" */,
+				FAE04A262DFF16AC00E0F7E8 /* XCLocalSwiftPackageReference "../Kingfisher" */,
+				FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "../Auth0.swift" */,
 			);
 			productRefGroup = FA7672A72A0CCFF80039B351 /* Products */;
 			projectDirPath = "";
@@ -336,6 +362,13 @@
 				FACB5F1C2A48AE0700F73388 /* ResponseGetRandomPhoto.swift in Sources */,
 				FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */,
 				FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */,
+				FA8F072A2DFF1AD10024E266 /* LocksmithError.swift in Sources */,
+				FA8F072B2DFF1AD10024E266 /* Locksmith.swift in Sources */,
+				FA8F072C2DFF1AD10024E266 /* LocksmithAccessibleOption.swift in Sources */,
+				FA8F072D2DFF1AD10024E266 /* Dictionary_Initializers.swift in Sources */,
+				FA8F072E2DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift in Sources */,
+				FA8F072F2DFF1AD10024E266 /* LocksmithSecurityClass.swift in Sources */,
+				FA8F07302DFF1AD10024E266 /* LocksmithInternetProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,45 +600,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		FA515CFE2A153DD600EE0121 /* XCRemoteSwiftPackageReference "Auth0" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/auth0/Auth0.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "../Auth0.swift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Auth0.swift;
 		};
-		FABFB2B82DFC6FE6004D8B7A /* XCRemoteSwiftPackageReference "Locksmith" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/matthewpalmer/Locksmith";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
+		FAE04A262DFF16AC00E0F7E8 /* XCLocalSwiftPackageReference "../Kingfisher" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Kingfisher;
 		};
-		FACB99242AB51575008423D4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FA515CFF2A153DD600EE0121 /* Auth0 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA515CFE2A153DD600EE0121 /* XCRemoteSwiftPackageReference "Auth0" */;
-			productName = Auth0;
-		};
-		FACB99252AB51575008423D4 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FACB99242AB51575008423D4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCLocalSwiftPackageReference section */
 	};
 	rootObject = FA76729E2A0CCFF80039B351 /* Project object */;
 }

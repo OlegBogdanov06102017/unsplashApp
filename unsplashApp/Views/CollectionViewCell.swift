@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+
 
 class CollectionViewCell: UICollectionViewCell{
     static let reuseIDCollection = "SecondSection"

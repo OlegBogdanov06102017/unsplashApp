@@ -1,107 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "605E3366-ACF2-4D68-AC1A-FDA8CFF79F8A"
+   uuid = "42B6B1E7-629B-4B57-B5A9-07C6466DDD09"
    type = "0"
    version = "2.0">
-<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2"
-            shouldBeEnabled = "Yes"
+            uuid = "59B29A29-0595-4763-826A-485148C9DDA4"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unsplashApp/ViewControllers/IntroViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "IntroViewController"
-            landmarkType = "21">
-            <Locations>
-               <Location
-                  uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2 - 935813a61fd60976"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.sentSuccessAlert(alert: __C.UIAlertController) -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "9533E63F-D14D-4F7C-AECC-8A1A03D529B2 - 7768789e49fe31ae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.IntroViewController.sentSuccessAlert() -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/ViewControllers/IntroViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "unsplashApp/Files/KeychainManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "sentDelegate()"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "moveToExplore()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6 - 47df4ddb7014d2f3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.KeychainManager.sentAlert() -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/Files/KeychainManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "0D4EA52F-B7B6-45F4-BACC-FF77C4A2C7F6 - 5a2315ddc8fff829"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "unsplashApp.KeychainManager.sentDelegate() -&gt; ()"
-                  moduleName = "unsplashApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olegbogdanov/Documents/Swift/developer/unsplashApp/unsplashApp/Files/KeychainManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
-=======
->>>>>>> be12693 (add some logic on ExploreViewController, try to add CollectionView in Table View)
 </Bucket>
