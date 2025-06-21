@@ -7,10 +7,10 @@
 
 import Foundation
 import UIKit
-
+import SnapKit
 
 final class IntroView: UIView {
-    let authorize = ApiManager()
+    private let authorize = ApiManager()
     
     //MARK: Свойства класса
     let image: UIImageView = {
@@ -19,7 +19,6 @@ final class IntroView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
     
     let exploreUnspalshPhotoText: UILabel = {
         let label = UILabel()
@@ -41,7 +40,7 @@ final class IntroView: UIView {
         label.text = "The source of freely-usable images. Powered by creators everywhere."
         label.textColor = .white
         label.numberOfLines = 2
-        label.textAlignment = .left //в фигме написано что размещение по центру фрейма но выглядит убого
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -60,6 +59,7 @@ final class IntroView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     let explorePhotosButton: UIButton = {
         //MARK: Explore photos button
         let button = UIButton(type: .system)
@@ -75,13 +75,12 @@ final class IntroView: UIView {
         return button
     }()
     
-    
-    
     init() {
         super.init(frame: .zero)
         setupView()
         setupConstraints()
     }
+    
     func setupView() {
         addSubview(image)
         addSubview(exploreUnspalshPhotoText)
@@ -90,39 +89,52 @@ final class IntroView: UIView {
         addSubview(explorePhotosButton)
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
     func setupConstraints() {
-        //MARK: ImageView
-        image.translatesAutoresizingMaskIntoConstraints = false
+        // MARK: ImageView
         let leftConstForImageView = image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0)
         let rightConstForImageView = image.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
         let bottomConstForImageView = image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
         let topConstForImageView = image.topAnchor.constraint(equalTo: topAnchor, constant: 0)
-        NSLayoutConstraint.activate([leftConstForImageView, rightConstForImageView,bottomConstForImageView,topConstForImageView])
-        //MARK: Explore Unspalsh photos
-        let leftConst = exploreUnspalshPhotoText.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
-        let rightConst = exploreUnspalshPhotoText.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
-        let topConst = exploreUnspalshPhotoText.topAnchor.constraint(equalTo: topAnchor, constant: 292)
-        NSLayoutConstraint.activate([leftConst, rightConst, topConst])
         
-        //MARK: The source of freely-usable images. Powered by creators everywhere.
-        let leftSourceConst = sourceText.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
-        let rightSourceConst = sourceText.rightAnchor.constraint(equalTo: rightAnchor, constant: -24)
-        let constBetweenTwoSubViews = sourceText.topAnchor.constraint(equalTo: exploreUnspalshPhotoText.bottomAnchor, constant: 16) //попробовал сделать констрейнт между двумя лэйблами. не уверене что верно как проверить в дебагере
-        NSLayoutConstraint.activate([leftSourceConst, rightSourceConst, constBetweenTwoSubViews])
+        NSLayoutConstraint.activate([
+            leftConstForImageView,
+            rightConstForImageView,
+            bottomConstForImageView,
+            topConstForImageView
+        ])
         
-        //MARK: Кнопка Log in
-        let leftLogInConst = logInButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
-        let rightSLogInConst = logInButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
-        let constBetweenLogInSource = logInButton.topAnchor.constraint(equalTo: sourceText.bottomAnchor, constant: 150)
-        let constBetweenLogInExplore = logInButton.bottomAnchor.constraint(equalTo: sourceText.bottomAnchor, constant: 206)// от низа source text до низа loginbutton
-        NSLayoutConstraint.activate([leftLogInConst, rightSLogInConst, constBetweenLogInSource, constBetweenLogInExplore])
+        // MARK: Explore Unspalsh photos
+        exploreUnspalshPhotoText.snp.makeConstraints { make in
+            make.left.equalTo(image.snp.left).offset(24)
+            make.right.equalTo(image.snp.right).offset(-10)
+            make.top.equalTo(image.snp.top).offset(290)
+        }
+        
+        // MARK: The source of freely-usable images. Powered by creators everywhere.
+        sourceText.snp.makeConstraints { make in
+            make.left.equalTo(image.snp.left).offset(24)
+            make.right.equalTo(image.snp.right).offset(-24)
+            make.top.equalTo(exploreUnspalshPhotoText.snp.bottom).offset(16)
+        }
+                
+        // MARK: Кнопка Log in
+        
+        logInButton.snp.makeConstraints { make in
+            make.left.equalTo(image.snp.left).offset(16)
+            make.right.equalTo(image.snp.right).offset(-16)
+            make.top.equalTo(sourceText.snp.bottom).offset(150)
+            make.bottom.equalTo(sourceText.snp.bottom).offset(206)
+        }
         
         //MARK: Explore photos button
-        let leftExploreButtonConst = explorePhotosButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
-        let rightExploreButtonConst = explorePhotosButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
-        let explorePhotosToLogIn = explorePhotosButton.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 66) // от низа loginbutton до низа explore photos
-        let constBetweenLogInExploreSource = explorePhotosButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 10)
-        NSLayoutConstraint.activate([leftExploreButtonConst, rightExploreButtonConst, constBetweenLogInExploreSource, explorePhotosToLogIn])
+        
+        explorePhotosButton.snp.makeConstraints { make in
+            make.left.equalTo(image.snp.left).offset(16)
+            make.right.equalTo(image.snp.right).offset(-16)
+            make.bottom.equalTo(logInButton.snp.bottom).offset(66) // от низа loginbutton до низа explore photos
+            make.top.equalTo(logInButton.snp.bottom).offset(10)
+        }
     }
     
     required init?(coder: NSCoder) {
