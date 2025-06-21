@@ -68,7 +68,7 @@ class ExploreViewController: UIViewController {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerCell) as! HeaderCell
         api.getRequestRandomPhoto { result, error in
             let raw = result?.urls?.raw
-            
+                     // TODO: Cделать guard чтобы обработать ошибку ???
             let imageURL = URL(string: raw!)
             let queue = DispatchQueue.global()
                 queue.async {

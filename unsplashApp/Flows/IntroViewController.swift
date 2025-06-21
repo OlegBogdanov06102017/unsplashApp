@@ -42,16 +42,13 @@ class IntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        print("[DEBUG] Login button targets: \(logInButton.allTargets)")
-        
         // Do any additional setup after loading the view.
     }
     //MARK: функция для перехода на ExploreViewController
      @objc func moveToExplore () {
-        let storyBoard = UIStoryboard(name: "Main", bundle:nil)
-        let exploreVC = self.storyboard?.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
-        self.navigationController?.pushViewController(exploreVC, animated: true)
-     //   self.present(exploreVC, animated: true)
+        let exploreVC = ExploreViewController()
+       self.navigationController?.pushViewController(exploreVC, animated: true)
+        //self.present(exploreVC, animated: true)
  }
   
 }
