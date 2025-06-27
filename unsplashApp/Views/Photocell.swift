@@ -1,19 +1,15 @@
-//
-//  Photocell.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-10-07.
-//
-
 import Foundation
 import UIKit
 
 
-class PhotoCell: UITableViewCell {
+class PhotoCell: UICollectionViewCell {
+    
     static let reuseID = "afterCollection"
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpViews()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUpView()
         setupConst()
     }
     
@@ -21,8 +17,8 @@ class PhotoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpViews() {
-        self.addSubview(imageViewCell)
+    func setUpView() {
+        addSubview(imageViewCell)
     }
     
     lazy var imageViewCell: UIImageView = {

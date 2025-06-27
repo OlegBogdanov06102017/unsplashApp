@@ -6,152 +6,193 @@
 //
 
 import UIKit
+import SnapKit
 
-class ExploreViewController: UIViewController {
-    private var collections: [ResponseGetRandomPhoto] = []
-    private let api = ApiManager()
-    private var myTableView = UITableView()
-    private let headerCell = "headerCell"
-
+final class ExploreViewController: UIViewController {
+    
+    private var collectionView: UICollectionView!
+    
+    private var items: [Items]!
+    
+    enum SectionKind: Int, CaseIterable {
+        case exploreSection
+        case newSection
+    }
     
     override func loadView() {
         super.loadView()
         hideNavigationBar()
-        createTable()
+        setUpCollectionView()
+        setUpConstraints()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
-    func createTable() {
-            self.myTableView = UITableView(frame: view.bounds, style: .plain)
-            self.view.addSubview(myTableView)
-            myTableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: headerCell)
-            myTableView.register(ExploreTableViewCell.self, forCellReuseIdentifier: ExploreTableViewCell.reuseID)
-        myTableView.register(CollectionViewTableCell.self, forCellReuseIdentifier: CollectionViewTableCell.id)
-            myTableView.register(PhotoCell.self, forCellReuseIdentifier: PhotoCell.reuseID)
-            self.myTableView.delegate = self
-            self.myTableView.dataSource = self
-            myTableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            myTableView.headerView(forSection: 0)
-            myTableView.separatorColor = .clear
-            myTableView.allowsSelection = false
-        }
-    
-//    func fetchData() {
-//        api.getRequestRandomPhoto { result, error in
-//            let raw = result?.urls.raw
-//            
-//            let imageURL = URL(string: raw)
-//            let queue = DispatchQueue.global()
-//                queue.async {
-//                        if let data = try? Data(contentsOf: imageURL!) {
-//                            DispatchQueue.main.async {
-//                                print("show header image")
-//                            }
-//                    }
-//                }
-//        }
-//            
-//    }
-
-    
-    
-    
-    
-     
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    private func setUpCollectionView() {
+        collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: makeLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(collectionView)
         
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerCell) as! HeaderCell
-        api.getRequestRandomPhoto { result, error in
-            let raw = result?.urls?.raw
-                     // TODO: Cделать guard чтобы обработать ошибку ???
-            let imageURL = URL(string: raw!)
-            let queue = DispatchQueue.global()
-                queue.async {
-                        if let data = try? Data(contentsOf: imageURL!) {
-                            DispatchQueue.main.async {
-                                view.headerImageView.image = UIImage(data: data)
-                                print("show header image")
-                            }
-                    }
-                }
-        }
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ExploreCollectionViewCell.reuseID)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
         
-        return view
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
-    //MARK: получение коллекции из реквеста getCollection
-  
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUpConstraints() {
+        collectionView.snp.makeConstraints { make in
+            make.left.equalTo(view.snp.left).offset(0)
+            make.right.equalTo(view.snp.right).offset(0)
+            make.top.equalTo(view.snp.top).offset(0)
+            make.bottom.equalTo(view.snp.bottom).offset(0)
+        }
     }
-    */
     
+    private func makeLayout() -> UICollectionViewCompositionalLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            guard let section = SectionKind(rawValue: sectionIndex) else { return nil }
+            
+            switch section {
+            case .exploreSection:
+                return self.createExploreSection()
+            case .newSection:
+                return self.createNewSection()
+            }
+        }
+    }
     
-
+    private func createExploreSection() -> NSCollectionLayoutSection {
+        // section -> group -> item -> size
+        // MARK: - item size , with Explore text
+        
+        let topItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(26)
+        )
+        
+        let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
+        topItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 146, trailing: 219)
+        
+        // MARK: - item size , with collectiobView
+        
+        let leadingItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.7),
+            heightDimension: .fractionalHeight(1)
+        )
+        let leadingItem = NSCollectionLayoutItem(layoutSize: leadingItemSize)
+        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 42, leading: -16, bottom: 0, trailing: 24)
+        
+        // MARK: - group size
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.3)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            repeatingSubitem: leadingItem,
+            count: 2
+        )
+        
+        // MARK: - section size
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        return section
+    }
+    
+    private func createNewSection() -> NSCollectionLayoutSection {
+        // section -> group -> item -> size
+        // MARK: - item size , with New text
+        
+        let topItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(26)
+        )
+        
+        let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
+        topItem.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 16, bottom: 18, trailing: 313)
+        
+        // MARK: - item size , with collectiobView
+        
+        let leadingItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(0.3)
+        )
+        
+        let leadingItem = NSCollectionLayoutItem(layoutSize: leadingItemSize)
+        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        
+        // MARK: - group size
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            repeatingSubitem: leadingItem,
+            count: 3
+        )
+        
+        // MARK: - section size
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        return section
+        
+    }
 }
 
-extension ExploreViewController: UITableViewDelegate, UITableViewDataSource  {
+extension ExploreViewController {
     func hideNavigationBar() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
-    //MARK: UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = myTableView.dequeueReusableCell(withIdentifier: CollectionViewTableCell.id, for: indexPath) as? CollectionViewTableCell else {
-            return UITableViewCell()
-        }
-       // cell.backgroundColor = .blue
-        return cell
-        
-        guard let cellText = myTableView.dequeueReusableCell(withIdentifier: ExploreTableViewCell.reuseID, for: indexPath) as? ExploreTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        cellText.myCell.text = "NEw"
-        
-        }
-    
-    //MARK: UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height:CGFloat = CGFloat()
-        if indexPath.row == 0 {
-            height = 42
-        } else if indexPath.row == 1 {
-            height = 146
-        } else if indexPath.row == 2 {
-            height = 42
-        }
-        else {
-            height = 50
-        }
-        return height
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        250.0
-    }
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource  {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let numberSection = SectionKind(rawValue: section)!
+        switch numberSection {
+        case .exploreSection:
+            return 3
+        case .newSection:
+            return 3
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        SectionKind.allCases.count
+    }
+   
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let numberSection = SectionKind(rawValue: indexPath.section)!
+        switch numberSection {
+        case .exploreSection:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath) as? ExploreCollectionViewCell else {return UICollectionViewCell() }
+            cell.backgroundColor = .blue
+            return cell
+        case .newSection:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
+            cell.backgroundColor = .green
+            cell.layer.cornerRadius = 10
+            cell.layer.borderWidth = 1
+            return cell
+        }
+        
+    }
 
+}
 
 
