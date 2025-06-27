@@ -1,19 +1,12 @@
-//
-//  HeaderRandomImage.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-06-22.
-//
-
 import UIKit
+import SnapKit
 
-class HeaderCell: UITableViewHeaderFooterView {
+class HeaderCell: UICollectionReusableView {
     
-    
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        configureContents()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -25,33 +18,63 @@ class HeaderCell: UITableViewHeaderFooterView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
+        image.backgroundColor = .cyan
         return image
     }()
     
     
-    func configureContents() {
-       
-        contentView.addSubview(headerImageView)
-        
-        NSLayoutConstraint.activate([
-            headerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            headerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            headerImageView.heightAnchor.constraint(equalToConstant: 250),
-            headerImageView.widthAnchor.constraint(equalToConstant: 390)
-                
-                    // Center the label vertically, and use it to fill the remaining
-                    // space in the header view.
-                ])
-        
-        
-        /*
-         // Only override draw() if you perform custom drawing.
-         // An empty implementation adversely affects performance during animation.
-         override func draw(_ rect: CGRect) {
-         // Drawing code
-         }
-         */
-        
+    private func setupView() {
+        addSubview(headerImageView)
+        makeConstaintsHeaderImage()
+        headerImageView.addSubview(titleLabel)
+        makeConstraintsTitleLabel()
+        headerImageView.addSubview(subTitileLabel)
+        makeConstraintsSubTitileLabel()
     }
+    
+    private func makeConstaintsHeaderImage() {
+        headerImageView.snp.makeConstraints { make in
+            make.left.equalTo(headerImageView.snp.left).offset(0)
+            make.right.equalTo(headerImageView.snp.right).offset(0)
+            make.bottom.equalTo(headerImageView.snp.bottom).offset(0)
+            make.top.equalTo(headerImageView.snp.top).offset(0)
+        }
+    }
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Photos for Everyone"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
+    }()
+    
+    private func makeConstraintsTitleLabel() {
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleLabel.snp.left).offset(48)
+            make.right.equalTo(titleLabel.snp.right).offset(-46)
+            make.top.equalTo(titleLabel.snp.top).offset(112)
+            make.bottom.equalTo(titleLabel.snp.bottom).offset(100)
+        }
+    }
+    
+    lazy var subTitileLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Photo by somebody"
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private func makeConstraintsSubTitileLabel() {
+        subTitileLabel.snp.makeConstraints { make in
+            make.left.equalTo(subTitileLabel.snp.left).offset(114)
+            make.right.equalTo(subTitileLabel.snp.right).offset(-115)
+            make.top.equalTo(subTitileLabel.snp.top).offset(220)
+            make.bottom.equalTo(subTitileLabel.snp.bottom).offset(16)
+        }
+    }
+    
 }
