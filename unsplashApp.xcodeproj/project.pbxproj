@@ -27,14 +27,15 @@
 		FA8F07302DFF1AD10024E266 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */; };
 		FA9BBF3D2A39D0D300F20A09 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */; };
 		FAAE47692A5319D400EC9316 /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAE47682A5319D400EC9316 /* ExploreCollectionViewCell.swift */; };
-		FAC4E48C2A54C45300694AC9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4E48B2A54C45300694AC9 /* CollectionViewCell.swift */; };
 		FAC4E4902A54C5F300694AC9 /* GetResponseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4E48F2A54C5F300694AC9 /* GetResponseCollection.swift */; };
-		FAC4E4922A54CB8500694AC9 /* CollectionViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4E4912A54CB8500694AC9 /* CollectionViewTableCell.swift */; };
 		FAC575692A114065001F265F /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAC575682A114065001F265F /* Inter.ttf */; };
 		FACB5F1C2A48AE0700F73388 /* ResponseGetRandomPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB5F1B2A48AE0700F73388 /* ResponseGetRandomPhoto.swift */; };
 		FACF6ACC2AD0BD910008B0CC /* Photocell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACF6ACB2AD0BD910008B0CC /* Photocell.swift */; };
 		FAD6A8F12A1A05760098F80A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6A8F02A1A05760098F80A /* Request.swift */; };
-		FAF4ABD92E0DE7D800D5EE24 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4ABD82E0DE7C800D5EE24 /* Items.swift */; };
+		FAF4ABD92E0DE7D800D5EE24 /* ListItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4ABD82E0DE7C800D5EE24 /* ListItems.swift */; };
+		FAF4ABDF2E1401AA00D5EE24 /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4ABDE2E1401A400D5EE24 /* ListSection.swift */; };
+		FAF4ABE12E14061500D5EE24 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4ABE02E14061000D5EE24 /* MockData.swift */; };
+		FAF4ABE32E18101A00D5EE24 /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4ABE22E18101300D5EE24 /* SectionHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,14 +78,15 @@
 		FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
 		FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		FAAE47682A5319D400EC9316 /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
-		FAC4E48B2A54C45300694AC9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		FAC4E48F2A54C5F300694AC9 /* GetResponseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResponseCollection.swift; sourceTree = "<group>"; };
-		FAC4E4912A54CB8500694AC9 /* CollectionViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableCell.swift; sourceTree = "<group>"; };
 		FAC575682A114065001F265F /* Inter.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Inter.ttf; sourceTree = "<group>"; };
 		FACB5F1B2A48AE0700F73388 /* ResponseGetRandomPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseGetRandomPhoto.swift; sourceTree = "<group>"; };
 		FACF6ACB2AD0BD910008B0CC /* Photocell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photocell.swift; sourceTree = "<group>"; };
 		FAD6A8F02A1A05760098F80A /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		FAF4ABD82E0DE7C800D5EE24 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		FAF4ABD82E0DE7C800D5EE24 /* ListItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItems.swift; sourceTree = "<group>"; };
+		FAF4ABDE2E1401A400D5EE24 /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
+		FAF4ABE02E14061000D5EE24 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		FAF4ABE22E18101300D5EE24 /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,9 +208,8 @@
 			children = (
 				FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */,
 				FA3962A52A44303200A215C1 /* HeaderCell.swift */,
+				FAF4ABE22E18101300D5EE24 /* SectionHeaderCell.swift */,
 				FAAE47682A5319D400EC9316 /* ExploreCollectionViewCell.swift */,
-				FAC4E4912A54CB8500694AC9 /* CollectionViewTableCell.swift */,
-				FAC4E48B2A54C45300694AC9 /* CollectionViewCell.swift */,
 				FACF6ACB2AD0BD910008B0CC /* Photocell.swift */,
 			);
 			path = Views;
@@ -238,7 +239,9 @@
 		FAF4ABDB2E0DEC7400D5EE24 /* Additional files */ = {
 			isa = PBXGroup;
 			children = (
-				FAF4ABD82E0DE7C800D5EE24 /* Items.swift */,
+				FAF4ABE02E14061000D5EE24 /* MockData.swift */,
+				FAF4ABD82E0DE7C800D5EE24 /* ListItems.swift */,
+				FAF4ABDE2E1401A400D5EE24 /* ListSection.swift */,
 			);
 			path = "Additional files";
 			sourceTree = "<group>";
@@ -368,21 +371,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7672AE2A0CCFF80039B351 /* IntroViewController.swift in Sources */,
+				FAF4ABE32E18101A00D5EE24 /* SectionHeaderCell.swift in Sources */,
 				FA09306D2A3B55F300DF626E /* ApiManager.swift in Sources */,
 				FA9BBF3D2A39D0D300F20A09 /* IntroView.swift in Sources */,
 				FA7672AA2A0CCFF80039B351 /* AppDelegate.swift in Sources */,
 				FA6292AE2A32431D00B11064 /* ResponseAccessToken.swift in Sources */,
 				FAAE47692A5319D400EC9316 /* ExploreCollectionViewCell.swift in Sources */,
-				FAC4E4922A54CB8500694AC9 /* CollectionViewTableCell.swift in Sources */,
 				FAC4E4902A54C5F300694AC9 /* GetResponseCollection.swift in Sources */,
 				FA7672AC2A0CCFF80039B351 /* SceneDelegate.swift in Sources */,
+				FAF4ABDF2E1401AA00D5EE24 /* ListSection.swift in Sources */,
 				FACF6ACC2AD0BD910008B0CC /* Photocell.swift in Sources */,
 				FAD6A8F12A1A05760098F80A /* Request.swift in Sources */,
 				FA3962A62A44303200A215C1 /* HeaderCell.swift in Sources */,
-				FAC4E48C2A54C45300694AC9 /* CollectionViewCell.swift in Sources */,
 				FACB5F1C2A48AE0700F73388 /* ResponseGetRandomPhoto.swift in Sources */,
+				FAF4ABE12E14061500D5EE24 /* MockData.swift in Sources */,
 				FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */,
-				FAF4ABD92E0DE7D800D5EE24 /* Items.swift in Sources */,
+				FAF4ABD92E0DE7D800D5EE24 /* ListItems.swift in Sources */,
 				FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */,
 				FA8F072A2DFF1AD10024E266 /* LocksmithError.swift in Sources */,
 				FA8F072B2DFF1AD10024E266 /* Locksmith.swift in Sources */,

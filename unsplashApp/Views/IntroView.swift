@@ -1,10 +1,3 @@
-//
-//  IntroView.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-06-14.
-//
-
 import Foundation
 import UIKit
 import SnapKit
@@ -16,8 +9,21 @@ final class IntroView: UIView {
     let image: UIImageView = {
         let imageBack = UIImage(named: "image 1")
         let imageView = UIImageView(image: imageBack)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    let labelStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 16
+        return stack
+    }()
+    
+    let buttonStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
     }()
     
     let exploreUnspalshPhotoText: UILabel = {
@@ -29,7 +35,6 @@ final class IntroView: UIView {
         label.numberOfLines = 0 // или 3? // 0 это когда лэйбл сам подстраивается под количество строк
         label.textAlignment = .left//в фигме написано что размещение по центру фрейма но выглядит убого
         //label.lineBreakMode = .byWordWrapping
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -41,12 +46,16 @@ final class IntroView: UIView {
         label.textColor = .white
         label.numberOfLines = 2
         label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    let emptyView: UILabel = {
+        let view = UILabel()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     var logInButton: UIButton = {
-        let viewController = ApiManager()
         let button = UIButton(type: .system)
         //MARK: Кнопка Log in
         button.setTitle("Log in", for: .normal)
@@ -54,9 +63,9 @@ final class IntroView: UIView {
         button.titleLabel?.tintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         button.backgroundColor = UIColor(red: 255/255 , green: 255/255, blue: 255/255, alpha: 1)
         button.layer.cornerRadius = 5
+        button.heightAnchor.constraint(equalToConstant: 56).isActive = true
         button.titleLabel?.textAlignment = .center
         button.isUserInteractionEnabled = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -70,8 +79,8 @@ final class IntroView: UIView {
         button.layer.borderColor = UIColor.white.cgColor
         button.titleLabel?.textAlignment = .center
         button.layer.cornerRadius = 5
+        button.heightAnchor.constraint(equalToConstant: 56).isActive = true
         button.isUserInteractionEnabled = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -83,58 +92,46 @@ final class IntroView: UIView {
     
     func setupView() {
         addSubview(image)
-        addSubview(exploreUnspalshPhotoText)
-        addSubview(sourceText)
-        addSubview(logInButton)
-        addSubview(explorePhotosButton)
-        translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelStackView)
+        labelStackView.addArrangedSubview(exploreUnspalshPhotoText)
+        labelStackView.addArrangedSubview(sourceText)
+        addSubview(emptyView)
+        bringSubviewToFront(emptyView)
+        self.addSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(logInButton)
+        buttonStackView.addArrangedSubview(explorePhotosButton)
     }
     
     func setupConstraints() {
         // MARK: ImageView
-        let leftConstForImageView = image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0)
-        let rightConstForImageView = image.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
-        let bottomConstForImageView = image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
-        let topConstForImageView = image.topAnchor.constraint(equalTo: topAnchor, constant: 0)
-        
-        NSLayoutConstraint.activate([
-            leftConstForImageView,
-            rightConstForImageView,
-            bottomConstForImageView,
-            topConstForImageView
-        ])
-        
-        // MARK: Explore Unspalsh photos
-        exploreUnspalshPhotoText.snp.makeConstraints { make in
-            make.left.equalTo(image.snp.left).offset(24)
-            make.right.equalTo(image.snp.right).offset(-10)
-            make.top.equalTo(image.snp.top).offset(290)
+        image.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        // MARK: The source of freely-usable images. Powered by creators everywhere.
-        sourceText.snp.makeConstraints { make in
-            make.left.equalTo(image.snp.left).offset(24)
-            make.right.equalTo(image.snp.right).offset(-24)
-            make.top.equalTo(exploreUnspalshPhotoText.snp.bottom).offset(16)
-        }
-                
-        // MARK: Кнопка Log in
+        // MARK: Label stack view
         
-        logInButton.snp.makeConstraints { make in
-            make.left.equalTo(image.snp.left).offset(16)
-            make.right.equalTo(image.snp.right).offset(-16)
-            make.top.equalTo(sourceText.snp.bottom).offset(150)
-            make.bottom.equalTo(sourceText.snp.bottom).offset(206)
+        labelStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(emptyView.snp.top)
+            make.right.left.equalToSuperview().inset(24)
         }
         
-        //MARK: Explore photos button
+        // MARK: Clear view
         
-        explorePhotosButton.snp.makeConstraints { make in
-            make.left.equalTo(image.snp.left).offset(16)
-            make.right.equalTo(image.snp.right).offset(-16)
-            make.bottom.equalTo(logInButton.snp.bottom).offset(66) // от низа loginbutton до низа explore photos
-            make.top.equalTo(logInButton.snp.bottom).offset(10)
+        emptyView.snp.makeConstraints { make in
+            make.top.equalTo(labelStackView.snp.bottom)
+            make.bottom.equalTo(buttonStackView.snp.top)
+            make.height.equalTo(100)
+            make.left.right.equalToSuperview()
         }
+        
+        // MARK: Button stack view
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.top.equalTo(emptyView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-46)
+            make.right.left.equalToSuperview().inset(16)
+        }
+        
     }
     
     required init?(coder: NSCoder) {

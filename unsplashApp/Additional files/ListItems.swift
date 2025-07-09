@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Items {
+public struct ListItems {
 
     let title: String
     let image: String

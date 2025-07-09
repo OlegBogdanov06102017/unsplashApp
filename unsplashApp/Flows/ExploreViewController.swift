@@ -1,10 +1,3 @@
-//
-//  ExploreViewController.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-06-24.
-//
-
 import UIKit
 import SnapKit
 
@@ -12,12 +5,17 @@ final class ExploreViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     
-    private var items: [Items]!
+//    private var items: [ListItems]!
+    
+    private let section = MockData.shared.pageSectionData
     
     enum SectionKind: Int, CaseIterable {
+        case headerSection
         case exploreSection
         case newSection
     }
+    
+    
     
     override func loadView() {
         super.loadView()
@@ -34,22 +32,21 @@ final class ExploreViewController: UIViewController {
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: makeLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(collectionView)
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ExploreCollectionViewCell.reuseID)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
         
-        collectionView.delegate = self
+        collectionView.register(HeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCell.reuseID)
+        collectionView.register(SectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderCell.reuseID)
+        collectionView.register(ExploreCollectionViewCell.self, forCellWithReuseIdentifier: ExploreCollectionViewCell.reuseID)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
+        
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.dataSource = self
+        view.addSubview(collectionView)
     }
     
     private func setUpConstraints() {
-        collectionView.snp.makeConstraints { make in
-            make.left.equalTo(view.snp.left).offset(0)
-            make.right.equalTo(view.snp.right).offset(0)
-            make.top.equalTo(view.snp.top).offset(0)
-            make.bottom.equalTo(view.snp.bottom).offset(0)
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -58,6 +55,8 @@ final class ExploreViewController: UIViewController {
             guard let section = SectionKind(rawValue: sectionIndex) else { return nil }
             
             switch section {
+            case .headerSection:
+                return self.createHeaderSection()
             case .exploreSection:
                 return self.createExploreSection()
             case .newSection:
@@ -66,13 +65,59 @@ final class ExploreViewController: UIViewController {
         }
     }
     
+    private func createHeaderSection() -> NSCollectionLayoutSection {
+        
+        //MARK: Size for header section
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.3)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        //MARK: Group for header section
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.3)
+        )
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        
+        //MARK: Section for header section
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        //MARK: Header for header section
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(250)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
     private func createExploreSection() -> NSCollectionLayoutSection {
         // section -> group -> item -> size
+        
         // MARK: - item size , with Explore text
         
         let topItemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(26)
+            widthDimension: .absolute(0),
+            heightDimension: .absolute(0)
         )
         
         let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
@@ -104,11 +149,26 @@ final class ExploreViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         
+        //MARK: Header for Explore section
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.1)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [header]
+        
         return section
     }
-    
+        
     private func createNewSection() -> NSCollectionLayoutSection {
         // section -> group -> item -> size
+        
         // MARK: - item size , with New text
         
         let topItemSize = NSCollectionLayoutSize(
@@ -117,7 +177,7 @@ final class ExploreViewController: UIViewController {
         )
         
         let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
-        topItem.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 16, bottom: 18, trailing: 313)
+        topItem.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 16, bottom: 18, trailing: 16)
         
         // MARK: - item size , with collectiobView
         
@@ -145,10 +205,25 @@ final class ExploreViewController: UIViewController {
         // MARK: - section size
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
         
-        return section
+        //MARK: Header for NEW Section
         
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.1)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        section.boundarySupplementaryItems = [header]
+        
+        return section
     }
 }
 
@@ -158,33 +233,40 @@ extension ExploreViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
-extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource  {
+// MARK: - UICollectionViewDataSource
+extension ExploreViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let numberSection = SectionKind(rawValue: section)!
         switch numberSection {
+        case .headerSection:
+            return 0
         case .exploreSection:
             return 3
         case .newSection:
             return 3
+            
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         SectionKind.allCases.count
     }
-   
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let numberSection = SectionKind(rawValue: indexPath.section)!
         switch numberSection {
+        case .headerSection:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath)
+            cell.backgroundColor = .cyan
+            return cell
         case .exploreSection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath) as? ExploreCollectionViewCell else {return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath)
             cell.backgroundColor = .blue
             return cell
         case .newSection:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath)
             cell.backgroundColor = .green
             cell.layer.cornerRadius = 10
             cell.layer.borderWidth = 1
@@ -192,7 +274,42 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind  == UICollectionView.elementKindSectionHeader else { return UICollectionReusableView() }
+        
+        switch indexPath.section {
+        case 0:
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderCell.reuseID,
+                for: indexPath
+            ) as! HeaderCell
+            return sectionHeader
+            
+        case 1:
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SectionHeaderCell.reuseID,
+                for: indexPath
+            ) as! SectionHeaderCell
+            sectionHeader.configure(title: "Explore")
+            return sectionHeader
+            
+        case 2:
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SectionHeaderCell.reuseID,
+                for: indexPath
+            ) as! SectionHeaderCell
+            sectionHeader.configure(title: "New")
+            return sectionHeader
+        default:
+            return UICollectionReusableView()
+        }
+    }
 }
+
+
 
 
