@@ -1,10 +1,3 @@
-//
-//  ExploreTableViewCell.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-07-03.
-//
-
 import UIKit
 import SnapKit
 
@@ -21,7 +14,7 @@ class ExploreCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .center
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = .brown
         return imageView
     }()
     
