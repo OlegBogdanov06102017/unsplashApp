@@ -1,17 +1,10 @@
-//
-//  CollectionImage.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-07-05.
-//
-
 import Foundation
 
 
 struct Collections: Codable {
     var id: String?
     var title: String?
-    let coverPhoto: CoverPhoto?
+    var cover_photo: CoverPhoto?
 }
 
 struct CoverPhoto: Codable {
@@ -20,6 +13,7 @@ struct CoverPhoto: Codable {
     let width: Int?
     let height: Int?
     let blur_hash: String?
+    let breadcrumbs: [Breadcrumbs]?
     let urls: Urls?
 }
 
@@ -31,6 +25,10 @@ struct Urls: Codable {
     let small: String?
     let thumb: String?
     let small_s3: String?
+}
+
+struct Breadcrumbs: Codable {
+    let title: String
 }
     
     

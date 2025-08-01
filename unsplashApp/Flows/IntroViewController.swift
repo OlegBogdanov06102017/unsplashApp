@@ -16,8 +16,6 @@ import SnapKit
 final class IntroViewController: UIViewController {
     
     private let introview = IntroView()
-    private var authorizeUrl = "https://unsplash.com/oauth/authorize"
-    private var authTokenUrl = "https://unsplash.com/oauth/token"
     weak var delegate: SendAlertsToIntroViewController?
     private var showAlert = false
     
