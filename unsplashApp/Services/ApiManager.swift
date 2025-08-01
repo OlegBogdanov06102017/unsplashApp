@@ -1,30 +1,21 @@
-//
-//  ApiManager.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-06-15.
-//
-
 import Foundation
 import AuthenticationServices
 import UIKit
 
 class ApiManager: NSObject  { //какой тип класса бы подошел?
-    private let getCollection = "https://api.unsplash.com/collections"
     private var authTokenUrl = "https://unsplash.com/oauth/token"
     private var authorizeUrl = "https://unsplash.com/oauth/authorize"
-    private let getRandomPhotoUri = "https://api.unsplash.com/photos/random"
-
     
-   
-   @objc func authorize(_ sender:UIButton!) {
-       tapToLogin()
-       print("tapped")
+    
+    
+    @objc func authorize(_ sender:UIButton!) {
+        tapToLogin()
+        print("tapped")
     }
     //MARK: старт логина
     func tapToLogin() {
         var initialUrl = URLComponents(string: authorizeUrl)
-            
+        
         let paramets = [
             URLQueryItem(name: "client_id", value: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0"),
             URLQueryItem(name: "redirect_uri", value: "myUnspalshApp://successCallBack"),
@@ -37,13 +28,13 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
         
     }
     //MARK: функция для обработки authorize
-  func makeAuthorize(_ url: URL?) {
-      //  guard let authUrl = URL(string: url) else { return }
+    func makeAuthorize(_ url: URL?) {
+        //  guard let authUrl = URL(string: url) else { return }
         let scheme = "myUnspalshApp"
         let session = ASWebAuthenticationSession(url: url!, callbackURLScheme: scheme) { callbackURL, error in
             guard error == nil, let callbackURL = callbackURL,
-            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems,
-            let authToken = queryItems.filter({ $0.name == "code" }).first?.value
+                  let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems,
+                  let authToken = queryItems.filter({ $0.name == "code" }).first?.value
             else {
                 print("An error occurred when attempting to sign in.")
                 return }
@@ -101,9 +92,12 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
     
     
     //MARK: Выполняем запрос на получение коллекиця, в дальнейшей для добавления в коллекш вью (класс getResopnseCollection)
-    func getRequestCollection(completion: @escaping(Collections?, Error?) -> Void) {
-        guard let url = URL(string: getCollection) else {return}
+    func getRequestCollection(completion: @escaping([Collections]?, Error?) -> Void) {
+        
+        guard let url = URL(string: CustomerAPI.collections.path) else {return}
+        
         var request = URLRequest(url: url)
+        
         do {
             let token = try KeychainManager.getToken()
             request.httpMethod = "GET"
@@ -112,13 +106,15 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
         } catch {
             print(error)
         }
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-                
-                guard let data = data, let response = response else { return }
-                print(data)
-                print(response)
+            
+            guard let data = data, let response = response else { return }
+            print(data)
+            print(response)
+            
             do {
-                let newBodyForCollection = try JSONDecoder().decode(Collections.self, from: data)
+                let newBodyForCollection = try JSONDecoder().decode([Collections].self, from: data)
                 completion(newBodyForCollection, nil)
                 let result = newBodyForCollection
                 print(data)
@@ -132,48 +128,156 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
         }.resume()
     }
     //MARK: Получение рандом фото для заголовка
-    func getRequestRandomPhoto(completion: @escaping (ResponseGetRandomPhoto?, Error?)-> Void) {
-            
-            guard let url = URL(string: getRandomPhotoUri) else { return }
-            var request = URLRequest(url: url)
+    func getRequestRandomPhoto(completion: @escaping (RandomPhoto?, Error?)-> Void) {
+        
+        guard let url = URL(string: CustomerAPI.randomPhoto.path) else {
+            completion(nil, NetworkError.badURL)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        do {
+            let token = try KeychainManager.getToken()
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } catch {
+            completion(nil,error)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print(error)
+                completion(nil, error)
+                return
+            }
+            guard let data = data, let response = response else { return }
+            print(data)
+            print(response)
             do {
-                let token = try KeychainManager.getToken()
-                request.httpMethod = "GET"
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            } catch {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let newBody = try decoder.decode(RandomPhoto.self, from: data)
+                completion(newBody, nil)
+                let result = newBody
+                print(data)
+                print(result)
+            }
+            catch let error {
+                completion(nil, error)
                 print(error)
             }
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                    if let error = error {
-                        print(error)
-                        completion(nil, error)
-                        return
-                    }
-                    guard let data = data, let response = response else { return }
-                        print(data)
-                        print(response)
-                        do {
-                            let decoder = JSONDecoder()
-                            decoder.keyDecodingStrategy = .convertFromSnakeCase
-                            let newBody = try decoder.decode(ResponseGetRandomPhoto.self, from: data)
-                            completion(newBody, nil)
-                            let result = newBody
-                            print(data)
-                            print(result)
+            
+        }.resume()
+    }
     
-                            // result: Data -> "https://test.com/image.png"
-                            
-                            // result: Data -> PNG0x120x123... -> UImage
-                            
-                        }
-                        catch let error {
-                            completion(nil, error)
-                            print(error)
-                        }
-                    
-            }.resume()
+    //MARK: Получение категорий или топиков
+    
+    func getResponseTopic(completion: @escaping ([Topic]?, Error?)-> Void) {
+        guard let url = URL(string: CustomerAPI.topic.path) else {
+            completion(nil, NetworkError.badURL)
+            return
         }
+        
+        var request = URLRequest(url: url)
+        
+        do {
+            let token = try KeychainManager.getToken()
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } catch {
+            completion(nil,error)
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error)
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data, let response = response else { return }
+            print(data)
+            print(response)
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let body = try decoder.decode([Topic].self, from: data)
+                completion(body, nil)
+                let result = body
+                print(data)
+                print(result)
+            } catch let error {
+                completion(nil, error)
+                print(error)
+            }
+        }.resume()
+    }
+    
+    
+    func getResponsePhotoBySlug(slug: String, completion: @escaping([TopicPhoto]?, Error?) -> Void) {
+        guard let url = URL(string: CustomerAPI.topicPhotos(slug: slug).path) else {
+            completion(nil, NetworkError.badURL)
+            return
+        }
+        var reqestLandscpe = URLComponents(string: CustomerAPI.topicPhotos(slug: slug).path)
+        
+        let queryItem = [
+            URLQueryItem(name: "orientation", value: "landscape")
+        ]
+        
+        reqestLandscpe?.queryItems = queryItem
+        var finalRequest = reqestLandscpe?.url
+        var request = URLRequest(url: finalRequest!)
+        
+        
+        do {
+            let token = try KeychainManager.getToken()
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } catch {
+            completion(nil,error)
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error)
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data, let response = response else { return }
+                print(data)
+                print(response)
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let body = try decoder.decode([TopicPhoto].self, from: data)
+                completion(body, nil)
+                let result = body
+                print(data)
+                print(result)
+            } catch let error {
+                completion(nil, error)
+            }
+        }.resume()
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: Запрос на фотки с пагинацией
     func getPhotoForPagination(pagination: Bool = false, completion: @escaping (Result<[String], Error>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + (pagination ? 3: 2), execute: {
@@ -200,7 +304,7 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
             completion(.success(pagination ? newData : originalData ))
         })
     }
-}
+
 
 extension ApiManager: ASWebAuthenticationPresentationContextProviding  {
         func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {

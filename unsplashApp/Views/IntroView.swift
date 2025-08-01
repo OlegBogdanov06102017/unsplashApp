@@ -120,7 +120,7 @@ final class IntroView: UIView {
         emptyView.snp.makeConstraints { make in
             make.top.equalTo(labelStackView.snp.bottom)
             make.bottom.equalTo(buttonStackView.snp.top)
-            make.height.equalTo(100)
+            make.height.equalTo(189)
             make.left.right.equalToSuperview()
         }
         

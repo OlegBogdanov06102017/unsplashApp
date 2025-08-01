@@ -25,7 +25,10 @@ class SectionHeaderCell: UICollectionReusableView {
     
     private func makeConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.height.equalTo(26) //incristicContentSize, высота не нужна
+            make.left.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview()
         }
     }
     

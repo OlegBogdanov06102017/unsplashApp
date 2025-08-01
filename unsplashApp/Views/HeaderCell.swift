@@ -21,7 +21,6 @@ class HeaderCell: UICollectionReusableView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
-        image.backgroundColor = .cyan
         return image
     }()
     
@@ -38,9 +37,9 @@ class HeaderCell: UICollectionReusableView {
     
     let subTitileLabel: UILabel = {
         let label = UILabel()
-        label.text = "Photo by somebody"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.numberOfLines = 1
         label.textColor = .white
         return label
     }()
@@ -69,4 +68,7 @@ class HeaderCell: UICollectionReusableView {
         }
     }
     
+    func configureSubTitleText(label: UILabel, text: String) {
+        label.text = "Photo by \(text)"
+    }
 }

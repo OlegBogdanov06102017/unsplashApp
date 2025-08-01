@@ -1,13 +1,14 @@
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class ExploreViewController: UIViewController {
-    
     private var collectionView: UICollectionView!
+    private let networkManager = ApiManager()
+    private var collections: [Collections] = []
+    private var topics: [Topic] = []
+    private var allphotosBySlug: [TopicPhoto] = []
     
-//    private var items: [ListItems]!
-    
-    private let section = MockData.shared.pageSectionData
     
     enum SectionKind: Int, CaseIterable {
         case headerSection
@@ -22,6 +23,7 @@ final class ExploreViewController: UIViewController {
         hideNavigationBar()
         setUpCollectionView()
         setUpConstraints()
+        loadTopics()
     }
 
     override func viewDidLoad() {
@@ -64,6 +66,8 @@ final class ExploreViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: HEADER
     
     private func createHeaderSection() -> NSCollectionLayoutSection {
         
@@ -110,38 +114,31 @@ final class ExploreViewController: UIViewController {
         return section
     }
     
+    //MARK: EXPLORE
+    
     private func createExploreSection() -> NSCollectionLayoutSection {
-        // section -> group -> item -> size
-        
-        // MARK: - item size , with Explore text
-        
-        let topItemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(0),
-            heightDimension: .absolute(0)
-        )
-        
-        let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
-        topItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 146, trailing: 219)
         
         // MARK: - item size , with collectiobView
         
         let leadingItemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.7),
+            widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
         )
         let leadingItem = NSCollectionLayoutItem(layoutSize: leadingItemSize)
-        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 42, leading: -16, bottom: 0, trailing: 24)
+        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+        
+        
         
         // MARK: - group size
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.3)
+            widthDimension: .fractionalWidth(0.8),
+            heightDimension: .fractionalHeight(0.16)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             repeatingSubitem: leadingItem,
-            count: 2
+            count: 1
         )
         
         // MARK: - section size
@@ -153,7 +150,7 @@ final class ExploreViewController: UIViewController {
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.1)
+            heightDimension: .fractionalHeight(0.04)
         )
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -165,20 +162,12 @@ final class ExploreViewController: UIViewController {
         
         return section
     }
-        
+     
+    //MARK: NEW
+    
     private func createNewSection() -> NSCollectionLayoutSection {
         // section -> group -> item -> size
-        
-        // MARK: - item size , with New text
-        
-        let topItemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(26)
-        )
-        
-        let topItem = NSCollectionLayoutItem(layoutSize: topItemSize)
-        topItem.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 16, bottom: 18, trailing: 16)
-        
+    
         // MARK: - item size , with collectiobView
         
         let leadingItemSize = NSCollectionLayoutSize(
@@ -187,7 +176,7 @@ final class ExploreViewController: UIViewController {
         )
         
         let leadingItem = NSCollectionLayoutItem(layoutSize: leadingItemSize)
-        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 0, bottom: 0, trailing: 0)
         
         // MARK: - group size
         
@@ -205,14 +194,13 @@ final class ExploreViewController: UIViewController {
         // MARK: - section size
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
         
         //MARK: Header for NEW Section
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.1)
+            heightDimension: .fractionalHeight(0.04)
         )
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -225,6 +213,31 @@ final class ExploreViewController: UIViewController {
         
         return section
     }
+    
+    private func loadTopics() {
+        networkManager.getResponseTopic { topic, error in
+            guard let topic = topic else { return }
+            DispatchQueue.main.async {
+                self.topics = topic
+                self.fetchPhotos(topics: topic)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func fetchPhotos(topics: [Topic]) {
+        for topic in topics {
+            networkManager.getResponsePhotoBySlug(slug: topic.slug) { photos, error in
+                if let firstPhoto = photos?.first {
+                    print("Тема: \(topic.title), Фото: \(firstPhoto.urls?.small)")
+                    DispatchQueue.main.async {
+                        self.allphotosBySlug = photos!
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 extension ExploreViewController {
@@ -242,7 +255,7 @@ extension ExploreViewController: UICollectionViewDataSource  {
         case .headerSection:
             return 0
         case .exploreSection:
-            return 3
+            return topics.count
         case .newSection:
             return 3
             
@@ -258,23 +271,31 @@ extension ExploreViewController: UICollectionViewDataSource  {
         let numberSection = SectionKind(rawValue: indexPath.section)!
         switch numberSection {
         case .headerSection:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath)
-            cell.backgroundColor = .cyan
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderCell.reuseID, for: indexPath)
             return cell
         case .exploreSection:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath)
-            cell.backgroundColor = .blue
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath) as? ExploreCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            let item = topics[indexPath.item]
+            if indexPath.item < allphotosBySlug.count {
+                let imageItem = allphotosBySlug[indexPath.item]
+                cell.configurePhoto(with: imageItem.urls?.small)
+            } else {
+                cell.configurePhoto(with: nil)
+            }
+            cell.cellTitle.text = item.title
             return cell
         case .newSection:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath)
             cell.backgroundColor = .green
-            cell.layer.cornerRadius = 10
             cell.layer.borderWidth = 1
             return cell
         }
         
     }
-    
+    // MARK: Headers
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind  == UICollectionView.elementKindSectionHeader else { return UICollectionReusableView() }
         
@@ -285,6 +306,24 @@ extension ExploreViewController: UICollectionViewDataSource  {
                 withReuseIdentifier: HeaderCell.reuseID,
                 for: indexPath
             ) as! HeaderCell
+            networkManager.getRequestRandomPhoto { photo, error in
+                guard let urlForPhoto = photo?.urls?.regular,
+                      let urlPhoto = URL(string: urlForPhoto) else {
+                    print("\(error?.localizedDescription)")
+                    return
+                }
+                
+                guard let urlForUser = photo?.user?.name else {
+                    print("\(error?.localizedDescription)")
+                    return
+                }
+                print(urlForPhoto)
+                print(urlForUser)
+                DispatchQueue.main.async {
+                    sectionHeader.headerImageView.kf.setImage(with: urlPhoto)
+                    sectionHeader.configureSubTitleText(label: sectionHeader.subTitileLabel, text: urlForUser)
+                }
+            }
             return sectionHeader
             
         case 1:
