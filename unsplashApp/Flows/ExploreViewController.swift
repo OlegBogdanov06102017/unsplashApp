@@ -6,7 +6,9 @@ final class ExploreViewController: UIViewController {
     private var collectionView: UICollectionView!
     private let networkManager = ApiManager()
     private var collections: [Collections] = []
-    private var topics: [TopicForCollectionView] = []
+    //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
+  //  private var topics: [TopicForCollectionView] = []
+    private var mockDataTopics = mockTopics
     private let exploreViewModel: ExploreViewModel
     
     init(viewModel: ExploreViewModel) {
@@ -36,8 +38,9 @@ final class ExploreViewController: UIViewController {
         hideNavigationBar()
         setUpCollectionView()
         setUpConstraints()
-        bindExploreViewModel()
-        exploreViewModel.loadTopics()
+       // bindExploreViewModel()
+        //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
+     //   exploreViewModel.loadTopics()
     }
     
     private func setUpCollectionView() {
@@ -223,20 +226,14 @@ final class ExploreViewController: UIViewController {
         
         return section
     }
-        
-    private func bindExploreViewModel() {
-        exploreViewModel.onTopicUpdated = { [weak self] topics in
-            print("🔄 onTopicUpdated: \(topics.count) topics")
-            self?.topics = topics
-            self?.collectionView.reloadData()
-        }
-        
-//        exploreViewModel.onPhotosUpdated = { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.collectionView.reloadData()
-//            }
+    //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
+//    private func bindExploreViewModel() {
+//        exploreViewModel.onTopicUpdated = { [weak self] topics in
+//            print("🔄 onTopicUpdated: \(topics.count) topics")
+//            self?.topics = topics
+//            self?.collectionView.reloadData()
 //        }
-    }
+//    }
     
 }
 
@@ -255,7 +252,7 @@ extension ExploreViewController: UICollectionViewDataSource  {
         case .headerSection:
             return 0
         case .exploreSection:
-            return topics.count
+            return mockDataTopics.count
         case .newSection:
             return 3
             
@@ -277,7 +274,7 @@ extension ExploreViewController: UICollectionViewDataSource  {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath) as? ExploreCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            let item = topics[indexPath.item]
+            let item = mockDataTopics[indexPath.item]
             cell.configure(imageURL: item.imageUrl, title: item.title)
             return cell
         case .newSection:

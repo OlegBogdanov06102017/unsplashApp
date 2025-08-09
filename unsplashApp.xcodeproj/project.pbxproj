@@ -20,6 +20,7 @@
 		FA7094E02E32CCE500905434 /* ResponsePhotoBySlug.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7094DF2E32CCDA00905434 /* ResponsePhotoBySlug.swift */; };
 		FA7094E62E3F9B5200905434 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7094E52E3F9B4A00905434 /* ExploreViewModel.swift */; };
 		FA7094F52E44FD8700905434 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7094F42E44FD8500905434 /* Topic.swift */; };
+		FA7095312E47D6E300905434 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7095302E47D6DD00905434 /* MockData.swift */; };
 		FA7672AA2A0CCFF80039B351 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672A92A0CCFF80039B351 /* AppDelegate.swift */; };
 		FA7672AC2A0CCFF80039B351 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672AB2A0CCFF80039B351 /* SceneDelegate.swift */; };
 		FA7672AE2A0CCFF80039B351 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672AD2A0CCFF80039B351 /* IntroViewController.swift */; };
@@ -70,6 +71,7 @@
 		FA7094DF2E32CCDA00905434 /* ResponsePhotoBySlug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePhotoBySlug.swift; sourceTree = "<group>"; };
 		FA7094E52E3F9B4A00905434 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		FA7094F42E44FD8500905434 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		FA7095302E47D6DD00905434 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		FA7672A62A0CCFF80039B351 /* unsplashApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unsplashApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7672A92A0CCFF80039B351 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA7672AB2A0CCFF80039B351 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		FA70952F2E47D6D400905434 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				FA7095302E47D6DD00905434 /* MockData.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		FA76729D2A0CCFF80039B351 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 		FA7672A82A0CCFF80039B351 /* unsplashApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA70952F2E47D6D400905434 /* Mocks */,
 				FA7094E42E3F9AEB00905434 /* ViewModels */,
 				FA7094E12E3F996800905434 /* Models */,
 				FA943B962A41D15A008EDB5B /* Views */,
@@ -409,6 +420,7 @@
 				FACF6ACC2AD0BD910008B0CC /* Photocell.swift in Sources */,
 				FAD6A8F12A1A05760098F80A /* Request.swift in Sources */,
 				FA3962A62A44303200A215C1 /* HeaderCell.swift in Sources */,
+				FA7095312E47D6E300905434 /* MockData.swift in Sources */,
 				FACB5F1C2A48AE0700F73388 /* RandomPhoto.swift in Sources */,
 				FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */,
 				FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */,
