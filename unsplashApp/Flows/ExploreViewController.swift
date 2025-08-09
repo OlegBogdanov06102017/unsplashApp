@@ -6,8 +6,17 @@ final class ExploreViewController: UIViewController {
     private var collectionView: UICollectionView!
     private let networkManager = ApiManager()
     private var collections: [Collections] = []
-    private var topics: [Topic] = []
-    private var allphotosBySlug: [TopicPhoto] = []
+    private var topics: [TopicForCollectionView] = []
+    private let exploreViewModel: ExploreViewModel
+    
+    init(viewModel: ExploreViewModel) {
+        self.exploreViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     enum SectionKind: Int, CaseIterable {
@@ -20,14 +29,15 @@ final class ExploreViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        hideNavigationBar()
-        setUpCollectionView()
-        setUpConstraints()
-        loadTopics()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideNavigationBar()
+        setUpCollectionView()
+        setUpConstraints()
+        bindExploreViewModel()
+        exploreViewModel.loadTopics()
     }
     
     private func setUpCollectionView() {
@@ -213,29 +223,19 @@ final class ExploreViewController: UIViewController {
         
         return section
     }
-    
-    private func loadTopics() {
-        networkManager.getResponseTopic { topic, error in
-            guard let topic = topic else { return }
-            DispatchQueue.main.async {
-                self.topics = topic
-                self.fetchPhotos(topics: topic)
-                self.collectionView.reloadData()
-            }
+        
+    private func bindExploreViewModel() {
+        exploreViewModel.onTopicUpdated = { [weak self] topics in
+            print("🔄 onTopicUpdated: \(topics.count) topics")
+            self?.topics = topics
+            self?.collectionView.reloadData()
         }
-    }
-    
-    func fetchPhotos(topics: [Topic]) {
-        for topic in topics {
-            networkManager.getResponsePhotoBySlug(slug: topic.slug) { photos, error in
-                if let firstPhoto = photos?.first {
-                    print("Тема: \(topic.title), Фото: \(firstPhoto.urls?.small)")
-                    DispatchQueue.main.async {
-                        self.allphotosBySlug = photos!
-                    }
-                }
-            }
-        }
+        
+//        exploreViewModel.onPhotosUpdated = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.collectionView.reloadData()
+//            }
+//        }
     }
     
 }
@@ -277,15 +277,8 @@ extension ExploreViewController: UICollectionViewDataSource  {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExploreCollectionViewCell.reuseID, for: indexPath) as? ExploreCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            
             let item = topics[indexPath.item]
-            if indexPath.item < allphotosBySlug.count {
-                let imageItem = allphotosBySlug[indexPath.item]
-                cell.configurePhoto(with: imageItem.urls?.small)
-            } else {
-                cell.configurePhoto(with: nil)
-            }
-            cell.cellTitle.text = item.title
+            cell.configure(imageURL: item.imageUrl, title: item.title)
             return cell
         case .newSection:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath)

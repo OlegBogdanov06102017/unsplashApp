@@ -17,7 +17,7 @@ public enum CustomerAPI {
             "https://api.unsplash.com/photos"
         case .topic:
             "https://api.unsplash.com/topics"
-        case .topicPhotos(slug: var slug):
+        case .topicPhotos(let slug):
             "https://api.unsplash.com/topics/\(slug)/photos"
         }
     }

@@ -10,7 +10,6 @@ class ExploreCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-//        imageView.backgroundColor = .cyan
         imageView.layer.cornerRadius = 20
         return imageView
     }()
@@ -47,24 +46,17 @@ class ExploreCollectionViewCell: UICollectionViewCell {
         cellTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-//            make.left.equalToSuperview().offset(114)
-//            make.right.equalToSuperview().offset(-115)
-//            make.bottom.equalToSuperview().offset(-16)
         }
     }
     
-    func configurePhoto(with urlString: String?) {
-        guard let urlString = urlString, let url = URL(string: urlString) else {
+    func configure(imageURL: String, title: String) {
+        guard let url = URL(string: imageURL) else {
             myCollectionCell.image = nil
                    return
                }
         myCollectionCell.kf.setImage(with: url)
-    }
-    
-    func configureTitle(with title: String) {
         cellTitle.text = title
     }
-        
 }
 
 

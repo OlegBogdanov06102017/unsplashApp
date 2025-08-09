@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  unsplashApp
-//
-//  Created by Oleg Bogdanov on 2023-05-11.
-//
-
 import UIKit
 import AuthenticationServices
 import Security
@@ -14,8 +7,8 @@ import SnapKit
 
 
 final class IntroViewController: UIViewController {
-    
     private let introview = IntroView()
+    private let viewModel = ExploreViewModel()
     weak var delegate: SendAlertsToIntroViewController?
     private var showAlert = false
     
@@ -42,7 +35,7 @@ final class IntroViewController: UIViewController {
     
     //MARK: функция для перехода на ExploreViewController
      @objc func moveToExplore () {
-        let exploreVC = ExploreViewController()
+         let exploreVC = ExploreViewController(viewModel: viewModel)
        self.navigationController?.pushViewController(exploreVC, animated: true)
  }
     
