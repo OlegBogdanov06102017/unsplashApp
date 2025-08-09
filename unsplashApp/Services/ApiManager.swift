@@ -17,7 +17,7 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
         var initialUrl = URLComponents(string: authorizeUrl)
         
         let paramets = [
-            URLQueryItem(name: "client_id", value: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0"),
+            URLQueryItem(name: "client_id", value: "h6RJBIMDPrM-ni-gyQxTx-1TXvbXtIX12sUpGBurYjQ"),
             URLQueryItem(name: "redirect_uri", value: "myUnspalshApp://successCallBack"),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: "public")
@@ -49,8 +49,8 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
     //MARK: Отправляем запрос на получение токена
     private func postRequestGetToken(code: String, completion: @escaping (ResponseAccessToken?, Error?) -> Void) {
         guard let url = URL(string: authTokenUrl) else {return}
-        let body = Request(client_id: "7yu-nrpW_2e3gNkkEqvIDNBTyqrX4W7oUdnXUTQ8yw0",
-                           client_secret: "sEBSPdHKCZMQgokmV2kZLqSniFjc09RKZfyzjSzUmmE",
+        let body = Request(client_id: "h6RJBIMDPrM-ni-gyQxTx-1TXvbXtIX12sUpGBurYjQ",
+                           client_secret: "2KK_EKsIdj9llqRU01F_92vN8JWj37PImVACPbcmcTQ",
                            redirect_uri: "myUnspalshApp://successCallBack",
                            code: code,
                            grant_type: "authorization_code")
@@ -218,19 +218,20 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
     
     
     func getResponsePhotoBySlug(slug: String, completion: @escaping([TopicPhoto]?, Error?) -> Void) {
-        guard let url = URL(string: CustomerAPI.topicPhotos(slug: slug).path) else {
-            completion(nil, NetworkError.badURL)
-            return
-        }
-        var reqestLandscpe = URLComponents(string: CustomerAPI.topicPhotos(slug: slug).path)
+            guard var components = URLComponents(string: CustomerAPI.topicPhotos(slug: slug).path) else {
+                completion(nil, NetworkError.badURL)
+                return
+            }
+            components.queryItems = [
+                URLQueryItem(name: "orientation", value: "landscape")
+            ]
+            
+            guard let finalURL = components.url else {
+                completion(nil, NetworkError.badURL)
+                return
+            }
         
-        let queryItem = [
-            URLQueryItem(name: "orientation", value: "landscape")
-        ]
-        
-        reqestLandscpe?.queryItems = queryItem
-        var finalRequest = reqestLandscpe?.url
-        var request = URLRequest(url: finalRequest!)
+        var request = URLRequest(url: finalURL)
         
         
         do {
@@ -245,7 +246,9 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print(error)
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 return
             }
             
@@ -257,12 +260,16 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let body = try decoder.decode([TopicPhoto].self, from: data)
-                completion(body, nil)
+                DispatchQueue.main.async {
+                    completion(body, nil)
+                }
                 let result = body
-                print(data)
                 print(result)
+                print(data)
             } catch let error {
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
             }
         }.resume()
     }
