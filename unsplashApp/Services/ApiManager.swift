@@ -273,46 +273,69 @@ class ApiManager: NSObject  { //какой тип класса бы подоше
             }
         }.resume()
     }
+    
+  //MARK: Получение списка фотографий, отсортированных в порядке обновления и респонсе только 3 фотки, согласно фигме
+  
+    func getListPhoto(page: Int, completion: @escaping(Result<[Photo], Error>) -> Void) {
+        guard var components = URLComponents(string: CustomerAPI.photo(page: page).path) else {
+            completion(.failure(NetworkError.badURL))
+            return
+        }
+        
+        components.queryItems = [
+            URLQueryItem(name: "per_page", value: "3"),
+            URLQueryItem(name: "order_by", value: "latest")
+        ]
+        
+        guard let finalURL = components.url else {
+            completion(.failure(NetworkError.badURL))
+            return
+        }
+        
+        var request = URLRequest(url: finalURL)
+        
+        
+        do {
+            let token = try KeychainManager.getToken()
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } catch {
+            completion(.failure(NetworkError.badURL))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error)
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            guard let data = data, let response = response else { return }
+            print(data)
+            print(response)
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let body = try decoder.decode([Photo].self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(body))
+                }
+                let result = body
+                print(result)
+                print(data)
+            } catch let error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
 }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //MARK: Запрос на фотки с пагинацией
-    func getPhotoForPagination(pagination: Bool = false, completion: @escaping (Result<[String], Error>) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + (pagination ? 3: 2), execute: {
-            let originalData = [
-            "Apple",
-            "Google",
-            "Facebook",
-            "Apple",
-            "Google",
-            "Facebook",
-            "Apple",
-            "Google",
-            "Facebook",
-            "Apple",
-            "Google",
-            "Facebook"
-            ]
-            
-            let newData = [
-            "banana",
-            "oranges",
-            "grapes"
-            ]
-            completion(.success(pagination ? newData : originalData ))
-        })
-    }
-
-
 extension ApiManager: ASWebAuthenticationPresentationContextProviding  {
         func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
             return ASPresentationAnchor()

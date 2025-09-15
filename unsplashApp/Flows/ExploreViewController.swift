@@ -5,11 +5,14 @@ import Kingfisher
 final class ExploreViewController: UIViewController {
     private var collectionView: UICollectionView!
     private let networkManager = ApiManager()
-    private var collections: [Collections] = []
+    private var timer: Timer?
+    private var randomPhotoCount = 0
+    private var latestPhoto: [Photo] = []
     //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
   //  private var topics: [TopicForCollectionView] = []
     private var mockDataTopics = mockTopics
     private let exploreViewModel: ExploreViewModel
+    private let activityIndicator = UIActivityIndicatorView()
     
     init(viewModel: ExploreViewModel) {
         self.exploreViewModel = viewModel
@@ -38,9 +41,24 @@ final class ExploreViewController: UIViewController {
         hideNavigationBar()
         setUpCollectionView()
         setUpConstraints()
-       // bindExploreViewModel()
+        setAnimationForHeader()
+        exploreViewModel.loadRandomPhoto()
         //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
      //   exploreViewModel.loadTopics()
+        bindExploreViewModelForPhotos()
+        exploreViewModel.loadLatestPhoto()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer?.invalidate()
+        timer = nil
+        
     }
     
     private func setUpCollectionView() {
@@ -56,6 +74,7 @@ final class ExploreViewController: UIViewController {
         
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.dataSource = self
+        collectionView.delegate = self
         view.addSubview(collectionView)
     }
     
@@ -235,6 +254,54 @@ final class ExploreViewController: UIViewController {
 //        }
 //    }
     
+    private func bindExploreViewModelForPhotos() {
+        exploreViewModel.onDataUpdatedPhoto = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        
+        exploreViewModel.onError = { [weak self] error in
+            print("Ошибка: \(error)")
+        }
+        
+        exploreViewModel.onLoadingStateChange = { [weak self] isLoading in
+            if isLoading {
+                self?.activityIndicator.startAnimating()
+            } else {
+                self?.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
+                self?.exploreViewModel.loadRandomPhoto()
+            }
+    }
+    
+    private func setAnimationForHeader() {
+        exploreViewModel.onRandomPhotoUpdated = { [weak self] urlPhoto, owner in
+            guard let self = self else { return }
+            self.randomPhotoCount += 1
+            
+            let headerIndexPath = IndexPath(item: 0, section: 0)
+            if let header = self.collectionView.supplementaryView(
+                forElementKind: UICollectionView.elementKindSectionHeader,
+                at: headerIndexPath
+            ) as? HeaderCell {
+                if self.randomPhotoCount <= 3 {
+                    header.updateImageFadeAnimation(with: urlPhoto)
+                } else {
+                    header.headerImageView.kf.setImage(with: urlPhoto)
+                }
+                
+                header.configureSubTitleText(label: header.subTitleLabel, text: owner)
+            }
+            if self.randomPhotoCount >= 3 {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
+        }
+    }
 }
 
 extension ExploreViewController {
@@ -254,7 +321,7 @@ extension ExploreViewController: UICollectionViewDataSource  {
         case .exploreSection:
             return mockDataTopics.count
         case .newSection:
-            return 3
+            return latestPhoto.count
             
         }
     }
@@ -278,8 +345,13 @@ extension ExploreViewController: UICollectionViewDataSource  {
             cell.configure(imageURL: item.imageUrl, title: item.title)
             return cell
         case .newSection:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath)
-            cell.backgroundColor = .green
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath)
+                    as? PhotoCell else {
+                return UICollectionViewCell()
+            }
+            let photo = latestPhoto[indexPath.item]
+            cell.configure(imageURL: photo.urls.regular)
+            
             cell.layer.borderWidth = 1
             return cell
         }
@@ -296,24 +368,6 @@ extension ExploreViewController: UICollectionViewDataSource  {
                 withReuseIdentifier: HeaderCell.reuseID,
                 for: indexPath
             ) as! HeaderCell
-            networkManager.getRequestRandomPhoto { photo, error in
-                guard let urlForPhoto = photo?.urls?.regular,
-                      let urlPhoto = URL(string: urlForPhoto) else {
-                    print("\(error?.localizedDescription)")
-                    return
-                }
-                
-                guard let urlForUser = photo?.user?.name else {
-                    print("\(error?.localizedDescription)")
-                    return
-                }
-                print(urlForPhoto)
-                print(urlForUser)
-                DispatchQueue.main.async {
-                    sectionHeader.headerImageView.kf.setImage(with: urlPhoto)
-                    sectionHeader.configureSubTitleText(label: sectionHeader.subTitileLabel, text: urlForUser)
-                }
-            }
             return sectionHeader
             
         case 1:
@@ -338,7 +392,3 @@ extension ExploreViewController: UICollectionViewDataSource  {
         }
     }
 }
-
-
-
-

@@ -21,19 +21,13 @@
 		FA7094E62E3F9B5200905434 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7094E52E3F9B4A00905434 /* ExploreViewModel.swift */; };
 		FA7094F52E44FD8700905434 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7094F42E44FD8500905434 /* Topic.swift */; };
 		FA7095312E47D6E300905434 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7095302E47D6DD00905434 /* MockData.swift */; };
+		FA70955F2E4E9D8700905434 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70955E2E4E9D7B00905434 /* Photo.swift */; };
 		FA7672AA2A0CCFF80039B351 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672A92A0CCFF80039B351 /* AppDelegate.swift */; };
 		FA7672AC2A0CCFF80039B351 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672AB2A0CCFF80039B351 /* SceneDelegate.swift */; };
 		FA7672AE2A0CCFF80039B351 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7672AD2A0CCFF80039B351 /* IntroViewController.swift */; };
 		FA7672B32A0CCFF90039B351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA7672B22A0CCFF90039B351 /* Assets.xcassets */; };
 		FA7672B62A0CCFF90039B351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7672B42A0CCFF90039B351 /* LaunchScreen.storyboard */; };
 		FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8143672A461D5D00B8B956 /* ExploreViewController.swift */; };
-		FA8F072A2DFF1AD10024E266 /* LocksmithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07252DFF1AD10024E266 /* LocksmithError.swift */; };
-		FA8F072B2DFF1AD10024E266 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07232DFF1AD10024E266 /* Locksmith.swift */; };
-		FA8F072C2DFF1AD10024E266 /* LocksmithAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */; };
-		FA8F072D2DFF1AD10024E266 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */; };
-		FA8F072E2DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */; };
-		FA8F072F2DFF1AD10024E266 /* LocksmithSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */; };
-		FA8F07302DFF1AD10024E266 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */; };
 		FA9BBF3D2A39D0D300F20A09 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */; };
 		FAAE47692A5319D400EC9316 /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAE47682A5319D400EC9316 /* ExploreCollectionViewCell.swift */; };
 		FAC4E4902A54C5F300694AC9 /* ResponseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4E48F2A54C5F300694AC9 /* ResponseCollection.swift */; };
@@ -58,9 +52,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0FE88279963ADF9656A5C036 /* Pods-unsplashApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashApp.release.xcconfig"; path = "Target Support Files/Pods-unsplashApp/Pods-unsplashApp.release.xcconfig"; sourceTree = "<group>"; };
-		92BA29945DFB91087FC12C9F /* Pods_unsplashApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_unsplashApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7D13E0502347E555B2E77FE /* Pods-unsplashApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashApp.debug.xcconfig"; path = "Target Support Files/Pods-unsplashApp/Pods-unsplashApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FA09306C2A3B55F300DF626E /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA0B64152A30E76B0050F13D /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FA3962A52A44303200A215C1 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
@@ -72,6 +63,7 @@
 		FA7094E52E3F9B4A00905434 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		FA7094F42E44FD8500905434 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		FA7095302E47D6DD00905434 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		FA70955E2E4E9D7B00905434 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		FA7672A62A0CCFF80039B351 /* unsplashApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unsplashApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7672A92A0CCFF80039B351 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA7672AB2A0CCFF80039B351 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,15 +72,6 @@
 		FA7672B52A0CCFF90039B351 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA7672B72A0CCFF90039B351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8143672A461D5D00B8B956 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
-		FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
-		FA8F07212DFF1AD10024E266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA8F07222DFF1AD10024E266 /* Locksmith.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locksmith.h; sourceTree = "<group>"; };
-		FA8F07232DFF1AD10024E266 /* Locksmith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
-		FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithAccessibleOption.swift; sourceTree = "<group>"; };
-		FA8F07252DFF1AD10024E266 /* LocksmithError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithError.swift; sourceTree = "<group>"; };
-		FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithInternetAuthenticationType.swift; sourceTree = "<group>"; };
-		FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithInternetProtocol.swift; sourceTree = "<group>"; };
-		FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
 		FA9BBF3C2A39D0D300F20A09 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		FAAE47682A5319D400EC9316 /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAC4E48F2A54C5F300694AC9 /* ResponseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCollection.swift; sourceTree = "<group>"; };
@@ -113,27 +96,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AC47BA03DCA5DD6BC05279B9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FA8F07292DFF1AD10024E266 /* Source */,
-				92BA29945DFB91087FC12C9F /* Pods_unsplashApp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CD7FDC34AC694CFC933B44C6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C7D13E0502347E555B2E77FE /* Pods-unsplashApp.debug.xcconfig */,
-				0FE88279963ADF9656A5C036 /* Pods-unsplashApp.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		FA7094E12E3F996800905434 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA70955E2E4E9D7B00905434 /* Photo.swift */,
 				FA7094F42E44FD8500905434 /* Topic.swift */,
 				FA7094DF2E32CCDA00905434 /* ResponsePhotoBySlug.swift */,
 				FA7094DD2E317E2A00905434 /* ResponseTopic.swift */,
@@ -164,8 +130,6 @@
 			children = (
 				FA7672A82A0CCFF80039B351 /* unsplashApp */,
 				FA7672A72A0CCFF80039B351 /* Products */,
-				CD7FDC34AC694CFC933B44C6 /* Pods */,
-				AC47BA03DCA5DD6BC05279B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,22 +193,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		FA8F07292DFF1AD10024E266 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				FA8F07202DFF1AD10024E266 /* Dictionary_Initializers.swift */,
-				FA8F07212DFF1AD10024E266 /* Info.plist */,
-				FA8F07222DFF1AD10024E266 /* Locksmith.h */,
-				FA8F07232DFF1AD10024E266 /* Locksmith.swift */,
-				FA8F07242DFF1AD10024E266 /* LocksmithAccessibleOption.swift */,
-				FA8F07252DFF1AD10024E266 /* LocksmithError.swift */,
-				FA8F07262DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift */,
-				FA8F07272DFF1AD10024E266 /* LocksmithInternetProtocol.swift */,
-				FA8F07282DFF1AD10024E266 /* LocksmithSecurityClass.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		FA943B962A41D15A008EDB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,11 +233,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA7672BA2A0CCFF90039B351 /* Build configuration list for PBXNativeTarget "unsplashApp" */;
 			buildPhases = (
-				2D8A805C8D86D8B8473045A8 /* [CP] Check Pods Manifest.lock */,
 				FA7672A22A0CCFF80039B351 /* Sources */,
 				FA7672A32A0CCFF80039B351 /* Frameworks */,
 				FA7672A42A0CCFF80039B351 /* Resources */,
-				D448E392AE771F99CF3DDEFE /* [CP] Embed Pods Frameworks */,
 				FA34C75E2E06D96E00089989 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -331,9 +277,9 @@
 			);
 			mainGroup = FA76729D2A0CCFF80039B351;
 			packageReferences = (
-				FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "../Auth0.swift" */,
+				FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "Auth0.swift" */,
 				FA6C6FF12E06D57900EDAA1E /* XCRemoteSwiftPackageReference "SnapKit" */,
-				FA7094D52E298ABD00905434 /* XCLocalSwiftPackageReference "../Kingfisher" */,
+				FA7094D52E298ABD00905434 /* XCLocalSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = FA7672A72A0CCFF80039B351 /* Products */;
 			projectDirPath = "";
@@ -356,48 +302,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2D8A805C8D86D8B8473045A8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-unsplashApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D448E392AE771F99CF3DDEFE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-unsplashApp/Pods-unsplashApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-unsplashApp/Pods-unsplashApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-unsplashApp/Pods-unsplashApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FA7672A22A0CCFF80039B351 /* Sources */ = {
@@ -424,15 +328,9 @@
 				FACB5F1C2A48AE0700F73388 /* RandomPhoto.swift in Sources */,
 				FA8143682A461D5D00B8B956 /* ExploreViewController.swift in Sources */,
 				FA0B64162A30E76B0050F13D /* KeychainManager.swift in Sources */,
-				FA8F072A2DFF1AD10024E266 /* LocksmithError.swift in Sources */,
-				FA8F072B2DFF1AD10024E266 /* Locksmith.swift in Sources */,
-				FA8F072C2DFF1AD10024E266 /* LocksmithAccessibleOption.swift in Sources */,
-				FA8F072D2DFF1AD10024E266 /* Dictionary_Initializers.swift in Sources */,
+				FA70955F2E4E9D8700905434 /* Photo.swift in Sources */,
 				FA5DC49F2E243DA0007091C9 /* CustomerAPI.swift in Sources */,
 				FA7094DE2E317E3700905434 /* ResponseTopic.swift in Sources */,
-				FA8F072E2DFF1AD10024E266 /* LocksmithInternetAuthenticationType.swift in Sources */,
-				FA8F072F2DFF1AD10024E266 /* LocksmithSecurityClass.swift in Sources */,
-				FA8F07302DFF1AD10024E266 /* LocksmithInternetProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +465,6 @@
 		};
 		FA7672BB2A0CCFF90039B351 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7D13E0502347E555B2E77FE /* Pods-unsplashApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -582,6 +479,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,7 +498,6 @@
 		};
 		FA7672BC2A0CCFF90039B351 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0FE88279963ADF9656A5C036 /* Pods-unsplashApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -615,6 +512,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -655,11 +553,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "../Auth0.swift" */ = {
+		FA082D9A2DFF178A00388836 /* XCLocalSwiftPackageReference "Auth0.swift" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Auth0.swift;
 		};
-		FA7094D52E298ABD00905434 /* XCLocalSwiftPackageReference "../Kingfisher" */ = {
+		FA7094D52E298ABD00905434 /* XCLocalSwiftPackageReference "Kingfisher" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Kingfisher;
 		};

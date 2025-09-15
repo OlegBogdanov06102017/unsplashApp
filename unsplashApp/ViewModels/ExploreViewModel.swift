@@ -5,8 +5,15 @@ final class ExploreViewModel {
     private let networkManager = ApiManager()
     var topics: [Topic] = []
     var allphotosBySlug: [TopicPhoto] = []
-    var onRandomPhotoUpdated:(() -> Void)?
+    var onRandomPhotoUpdated:((_ url: URL, _ owner: String ) -> Void)?
     var onTopicUpdated:(([TopicForCollectionView])-> Void)?
+    var photos:[Photo] = []
+    var onDataUpdatedPhoto:(() -> Void)?
+    var onLoadingStateChange:((Bool) -> Void)?
+    var onError:((Error) -> Void)?
+    var isLoading = false
+    var currentPage = 1
+    
     
     //MARK: Have to comment func loadTopics() due to 50 request per 1 hour
 //    func loadTopics() {
@@ -37,5 +44,57 @@ final class ExploreViewModel {
 //            }
 //        }
 //    }
+    
+    func loadRandomPhoto() {
+        networkManager.getRequestRandomPhoto { [weak self] photo, error in
+            guard let urlForPhoto = photo?.urls?.regular,
+                  let urlPhoto = URL(string: urlForPhoto) else {
+                print(error ?? "no load")
+                return
+            }
+            
+            guard let urlForUser = photo?.user?.name else {
+                print(error ?? "no owner")
+                return
+            }
+            print(urlForPhoto)
+            print(urlForUser)
+            DispatchQueue.main.async {
+                self?.onRandomPhotoUpdated?(urlPhoto, urlForUser)
+            }
+        }
+    }
+    
+    func loadLatestPhoto() {
+        isLoading = true
+        self.onLoadingStateChange?(true)
+        
+        networkManager.getListPhoto(page: currentPage) { [weak self] result in
+            guard let self = self else { return }
+            self.isLoading = false
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let newPhoto):
+                    self.photos.append(contentsOf: newPhoto)
+                    self.onDataUpdatedPhoto?()
+                case .failure(let error):
+                    self.onError?(error)
+                }
+            }
+        }
+    }
+    
+    func loadInitialPhoto() {
+        currentPage = 1
+        loadLatestPhoto()
+    }
+    
+    func loadMorePhoto() {
+        guard !isLoading else {
+            return
+        }
+        currentPage += 1
+        loadLatestPhoto()
+    }
     
 }
