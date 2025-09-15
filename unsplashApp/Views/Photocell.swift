@@ -10,7 +10,7 @@ class PhotoCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
-    //    setupConst()
+        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -24,22 +24,22 @@ class PhotoCell: UICollectionViewCell {
     lazy var imageViewCell: UIImageView = {
         let image = UIImageView ()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
     }()
     
+    func configure(imageURL: String) {
+        guard let url = URL(string: imageURL) else {
+            imageViewCell.image = nil
+            return
+        }
+        imageViewCell.kf.setImage(with: url)
+    }
     
-//    func setupConst() {
-//        
-//        contentView.addSubview(imageViewCell)
-//        
-//        NSLayoutConstraint.activate([
-//            imageViewCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-//            imageViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-//            imageViewCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-//            imageViewCell.heightAnchor.constraint(equalToConstant: 250),
-//            imageViewCell.widthAnchor.constraint(equalToConstant: 375)
-//        ])
-//    }
+    private func makeConstraints() {
+        imageViewCell.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
 }

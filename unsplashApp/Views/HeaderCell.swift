@@ -21,6 +21,7 @@ class HeaderCell: UICollectionReusableView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.alpha = 1.0
         return image
     }()
     
@@ -35,7 +36,7 @@ class HeaderCell: UICollectionReusableView {
     }()
     
     
-    let subTitileLabel: UILabel = {
+    let subTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 12)
@@ -47,7 +48,7 @@ class HeaderCell: UICollectionReusableView {
     private func setupView() {
         addSubview(headerImageView)
         addSubview(titleLabel)
-        addSubview(subTitileLabel)
+        addSubview(subTitleLabel)
     }
     
     private func makeConstaints() {
@@ -60,7 +61,7 @@ class HeaderCell: UICollectionReusableView {
             make.centerY.equalToSuperview()
         }
         
-        subTitileLabel.snp.makeConstraints { make in
+        subTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(114)
             make.right.equalToSuperview().offset(-115)
@@ -71,4 +72,14 @@ class HeaderCell: UICollectionReusableView {
     func configureSubTitleText(label: UILabel, text: String) {
         label.text = "Photo by \(text)"
     }
+    
+    func updateImageFadeAnimation(with url: URL?) {
+        UIView.transition(with: headerImageView,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.headerImageView.kf.setImage(with: url)
+        }, completion: nil)
+    }
+
 }

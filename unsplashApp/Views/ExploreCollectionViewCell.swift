@@ -52,8 +52,8 @@ class ExploreCollectionViewCell: UICollectionViewCell {
     func configure(imageURL: String, title: String) {
         guard let url = URL(string: imageURL) else {
             myCollectionCell.image = nil
-                   return
-               }
+            return
+        }
         myCollectionCell.kf.setImage(with: url)
         cellTitle.text = title
     }
