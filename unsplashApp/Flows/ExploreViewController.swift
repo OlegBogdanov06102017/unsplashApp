@@ -74,7 +74,6 @@ final class ExploreViewController: UIViewController {
         
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.dataSource = self
-        collectionView.delegate = self
         view.addSubview(collectionView)
     }
     
